@@ -7,6 +7,24 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        
+        <TextBlock HorizontalAlignment="Left" Height="44" Margin="30,10,0,0" TextWrapping="Wrap" Text="StuckOverflow" VerticalAlignment="Top" Width="186" RenderTransformOrigin="0.22,1.068" FontSize="24"/>
+        <TextBlock HorizontalAlignment="Left" Height="44" Margin="518,10,0,0" TextWrapping="Wrap" Text="Log In" VerticalAlignment="Top" Width="120" FontSize="24"/>
+        <TextBlock HorizontalAlignment="Left" Height="44" Margin="660,10,0,0" TextWrapping="Wrap" Text="Sign Up" VerticalAlignment="Top" Width="107" FontSize="24"/>
+        <ListView HorizontalAlignment="Left" Height="279" Margin="112,78,0,0" VerticalAlignment="Top" Width="496">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn/>
+                </GridView>
+            </ListView.View>
+            <TabControl Height="28" Width="456">
+                <TabItem Header="TabItem">
+                    <Grid Background="#FFE5E5E5"/>
+                </TabItem>
+                <TabItem Header="TabItem">
+                    <Grid Background="#FFE5E5E5"/>
+                </TabItem>
+            </TabControl>
+        </ListView>
+
     </Grid>
 </Window>
