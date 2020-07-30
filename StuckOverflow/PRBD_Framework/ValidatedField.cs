@@ -10,23 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace StuckOverflow
+namespace PRBD_Framework
 {
-    /// <summary>
-    /// Logique d'interaction pour Signup.xaml
-    /// </summary>
-    public partial class Signup : Window
+    public class ValidatedField : StackPanel
     {
-        public Signup()
+        public override void EndInit()
         {
-            InitializeComponent();
-        }
-
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
+            var err = new ErrorMessages { MyTarget = (FrameworkElement)Children[0] };
+            Children.Add(err);
+            base.EndInit();
         }
     }
 }

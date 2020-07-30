@@ -117,58 +117,52 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Error_DoesNotExist" xml:space="preserve">
-    <value>does not exist</value>
-  </data>
   <data name="Error_LengthGreaterEqual3" xml:space="preserve">
-    <value>length must be &gt;= 3</value>
+    <value>longueur doit être &gt;= 3</value>
   </data>
   <data name="Error_MustMatchConfirmPassword" xml:space="preserve">
-    <value>must match confirm password</value>
+    <value>confirmation de mot de passe ne matche pas</value>
   </data>
   <data name="Error_MustMatchPassword" xml:space="preserve">
-    <value>must match password</value>
+    <value>mot de passe ne matche pas</value>
   </data>
   <data name="Error_NotAvailable" xml:space="preserve">
-    <value>not available</value>
+    <value>pas disponible</value>
   </data>
   <data name="Error_Required" xml:space="preserve">
-    <value>required</value>
-  </data>
-  <data name="Error_TooMuchFollowers" xml:space="preserve">
-    <value>You cannot follow this member because he has the maximum of followers</value>
+    <value>requis</value>
   </data>
   <data name="Error_WrongPassword" xml:space="preserve">
-    <value>wrong password</value>
+    <value>mauvais mot de passe</value>
   </data>
   <data name="LoginView_Cancel" xml:space="preserve">
-    <value>Cancel</value>
+    <value>Annuler</value>
   </data>
   <data name="LoginView_Login" xml:space="preserve">
-    <value>Login</value>
+    <value>Se connecter</value>
   </data>
   <data name="LoginView_Message_1" xml:space="preserve">
-    <value>If your don't have a login and a password, click</value>
+    <value>Si vous n'avez pas de pseudo ni de mot de passe, cliquez</value>
   </data>
   <data name="LoginView_Message_2" xml:space="preserve">
-    <value>here</value>
+    <value>ici</value>
   </data>
   <data name="LoginView_Message_3" xml:space="preserve">
-    <value>to sign-up.</value>
+    <value>pour vous enregistrer</value>
   </data>
   <data name="LoginView_Password" xml:space="preserve">
-    <value>Password</value>
+    <value>Mot de passe:</value>
   </data>
   <data name="LoginView_Pseudo" xml:space="preserve">
-    <value>Pseudo</value>
+    <value>Pseudonyme:</value>
   </data>
   <data name="LoginView_Title" xml:space="preserve">
-    <value>Login</value>
+    <value>Connexion</value>
   </data>
   <data name="MembersTabName" xml:space="preserve">
-    <value>Members</value>
+    <value>Membres</value>
   </data>
   <data name="Menu_Logout" xml:space="preserve">
-    <value>Logout</value>
+    <value>Se déconnecter</value>
   </data>
 </root>
