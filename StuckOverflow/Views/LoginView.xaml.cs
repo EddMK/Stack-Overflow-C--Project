@@ -70,8 +70,16 @@ namespace prbd_1920_xyy {
             }
         }
 
+        private void ShowSignUp()
+        {
+            var mainView = new MainView();
+            mainView.Show();
+            Application.Current.MainWindow = mainView;
+        }
+
         public ICommand Login { get; set; }
         public ICommand Cancel { get; set; }
+        public ICommand SignUp { get; set; }
 
         private static void ShowMainView() {
             var mainView = new MainView();
@@ -88,6 +96,8 @@ namespace prbd_1920_xyy {
                 () => { return pseudo != null && password != null && !HasErrors; });
             
             Cancel = new RelayCommand(() => Close());
+
+            SignUp = new RelayCommand(() => Close());
         }
     }
 }

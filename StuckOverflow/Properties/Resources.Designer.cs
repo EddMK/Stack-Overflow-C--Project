@@ -221,5 +221,23 @@ namespace prbd_1920_xyy.Properties {
                 return ResourceManager.GetString("Menu_Logout", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Confirm Password.
+        /// </summary>
+        public static string SignUpView_Confirm {
+            get {
+                return ResourceManager.GetString("SignUpView_Confirm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Registration.
+        /// </summary>
+        public static string SignUpView_Title {
+            get {
+                return ResourceManager.GetString("SignUpView_Title", resourceCulture);
+            }
+        }
     }
 }
