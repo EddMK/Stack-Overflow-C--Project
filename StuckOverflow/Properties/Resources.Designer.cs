@@ -79,6 +79,15 @@ namespace prbd_1920_xyy.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Member already exists with the same pseudo.
+        /// </summary>
+        public static string Error_MemberExists {
+            get {
+                return ResourceManager.GetString("Error_MemberExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à must match confirm password.
         /// </summary>
         public static string Error_MustMatchConfirmPassword {

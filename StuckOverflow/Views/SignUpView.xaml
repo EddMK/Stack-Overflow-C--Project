@@ -27,7 +27,7 @@
         <Label x:Name="label" Content="{x:Static p:Resources.LoginView_Pseudo}" VerticalAlignment="Center" Padding="5" />
         <f:ValidatedField Grid.Column="1" VerticalAlignment="Center">
             <TextBox x:Name="txtPseudo" TextWrapping="Wrap" Grid.Column="1" 
-                     Text="{Binding Pseudo, UpdateSourceTrigger=PropertyChanged}"/>
+                     Text="{Binding Pseudo, UpdateSourceTrigger=LostFocus}"/>
         </f:ValidatedField>
         <Label Content="{x:Static p:Resources.LoginView_Password}" Grid.Row="1" VerticalAlignment="Center" Padding="5"/>
         <f:ValidatedField Grid.Row="1" Grid.Column="1" VerticalAlignment="Center">
@@ -40,7 +40,7 @@
         <f:ValidatedField Grid.Row="2" Grid.Column="1" VerticalAlignment="Center">
             <PasswordBox x:Name="txtConfirmPassword"
                      f:PasswordHelper.Attach="True"
-                     f:PasswordHelper.Password="{Binding Password, UpdateSourceTrigger=PropertyChanged}" 
+                     f:PasswordHelper.Password="{Binding ConfirmPassword, UpdateSourceTrigger=PropertyChanged}" 
                      Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" />
         </f:ValidatedField>
         <DockPanel Grid.Row="4" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10">
@@ -49,7 +49,7 @@
                     Command="{Binding Cancel}" />
             <Button x:Name="btnLogin" Content="S'inscrire" 
                     HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" IsDefault="True" Margin="10,0,0,0" 
-                    Command="{Binding Login}"/>
+                    Command="{Binding SignUp}"/>
         </DockPanel>
     </Grid>
 </f:WindowBase>
