@@ -125,6 +125,9 @@ namespace prbd_1920_xyy
             if (!HasErrors)
             {
                 var newmember = App.Model.CreateMember(Pseudo, Password);
+                App.Model.Members.Add(newmember);
+                App.Model.SaveChanges();
+                Console.Write(App.Model.Members);
                 App.CurrentUser = newmember; // le membre connecté devient le membre courant
                 ShowMainView(); // ouverture de la fenêtre principale
                 Close(); // fermeture de la fenêtre de login
