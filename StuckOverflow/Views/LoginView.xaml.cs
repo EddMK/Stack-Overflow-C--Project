@@ -1,7 +1,9 @@
 ﻿using PRBD_Framework;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -72,9 +74,10 @@ namespace prbd_1920_xyy {
 
         private void ShowSignUp()
         {
-            var mainView = new MainView();
-            mainView.Show();
-            Application.Current.MainWindow = mainView;
+            var signupView = new SignUpView();
+            signupView.Show();
+            window.Close();
+            Application.Current.MainWindow = signupView;
         }
 
         public ICommand Login { get; set; }
@@ -97,7 +100,7 @@ namespace prbd_1920_xyy {
             
             Cancel = new RelayCommand(() => Close());
 
-            SignUp = new RelayCommand(() => Close());
+            SignUp = new RelayCommand(() => ShowSignUp());
         }
     }
 }
