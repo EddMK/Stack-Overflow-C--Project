@@ -9,10 +9,11 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <ListView x:Name="listView" ItemsSource="{Binding Members}" SelectionMode="Single">
+        <ListView x:Name="listView" ItemsSource="{Binding Posts}" SelectionMode="Single">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="MouseDoubleClick">
-                    <i:InvokeCommandAction Command="{Binding DisplayMemberDetails}" 
+                    
+                    <i:InvokeCommandAction  Command="{Binding DisplayMemberDetails}" 
                                            CommandParameter="{Binding ElementName=listView, Path=SelectedItem}"/>
                 </i:EventTrigger>
             </i:Interaction.Triggers>

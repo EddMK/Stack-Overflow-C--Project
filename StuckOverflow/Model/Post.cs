@@ -19,6 +19,9 @@ namespace prbd_1920_xyy
 
         protected Post() { }
 
-
+        public override string ToString()
+        {
+            return $"<Post: = {Title} >";
+        }
     }
 }

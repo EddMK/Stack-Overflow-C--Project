@@ -39,6 +39,7 @@ namespace prbd_1920_xyy {
             post.DateTime = Date;
             post.AcceptedAnswerId = AcceptedAnswerId;
             post.ParentId = ParentId;
+            Posts.Add(post);
             return post;
         }
 
