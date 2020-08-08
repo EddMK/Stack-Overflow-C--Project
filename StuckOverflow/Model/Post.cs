@@ -17,11 +17,13 @@ namespace prbd_1920_xyy
         public int AcceptedAnswerId { get; set; }
         public int ParentId { get; set; }
 
+        public virtual Member Author { get; set; }
+
         protected Post() { }
 
         public override string ToString()
         {
-            return $"<Post: = {Title} >";
+            return $"{Title}";
         }
     }
 }

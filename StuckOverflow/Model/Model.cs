@@ -56,6 +56,8 @@ namespace prbd_1920_xyy {
                 Console.Write("Seeding members... ");
                 var q1 = CreatePost(2,"Etre ou ne pas être ?","Question philosophique",
                     DateTime.Now,0,0);
+                var q2 = CreatePost(3,"Q2","Q2",
+                    DateTime.Now,0,0);
                 SaveChanges();
                 Console.WriteLine("ok");
             }

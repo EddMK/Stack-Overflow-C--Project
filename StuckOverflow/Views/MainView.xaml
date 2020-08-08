@@ -20,11 +20,14 @@
             <MenuItem Header="{x:Static p:Resources.Menu_Logout}" Command="{Binding Logout}"/>
         </Menu>
         <TabControl x:Name="tabControl" Margin="10" Grid.Row="1">
-            <TabItem x:Name="membersTab" Header="{x:Static p:Resources.MembersTabName}">
+            <TabItem x:Name="membersTab" Header="Newest">
                 <ContentControl>
                     <local:MembersView/>
                 </ContentControl>
             </TabItem>
+            <TabItem Header="Active" />
+            <TabItem Header="Unanswered" />
+            <TabItem Header="Votes" />
         </TabControl>
     </Grid>
 </f:WindowBase>

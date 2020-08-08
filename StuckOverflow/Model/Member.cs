@@ -10,6 +10,10 @@ namespace prbd_1920_xyy {
         public string Password { get; set; }
         public Role Role { get; set; }
 
+        [InverseProperty(nameof(Post.Author))]
+        public virtual ICollection<Post> PostWritten { get; set; } =
+            new HashSet<Post>();
+
         protected Member() { }
 
         public override string ToString() {
