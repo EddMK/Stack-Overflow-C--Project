@@ -15,7 +15,7 @@
                     <WrapPanel>
                         <TextBlock  Text="{Binding Title}"/>
                         <TextBlock Text="{Binding Body}"/>
-                        <TextBlock Text="{Binding DateTime, StringFormat=dd-MM-yyyy}"/>
+                        <TextBlock Text="{Binding GetAgo}"/>
                     </WrapPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
