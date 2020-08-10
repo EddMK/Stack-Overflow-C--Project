@@ -31,7 +31,7 @@ namespace prbd_1920_xyy {
             }
             var tab = new TabItem() {
                 Header = isNew ? "<new member>" : m.UserName,
-                Content = new MemberDetailView(m)
+                //Content = new MemberDetailView(m)
             };
             tabControl.Items.Add(tab);
             tab.MouseDown += (o, e) => {

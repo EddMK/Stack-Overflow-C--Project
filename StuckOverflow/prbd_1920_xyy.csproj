@@ -80,6 +80,9 @@
     <Compile Include="Views\SignUpView.xaml.cs">
       <DependentUpon>SignUpView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\UnansweredView.xaml.cs">
+      <DependentUpon>UnansweredView.xaml</DependentUpon>
+    </Compile>
     <Page Include="Views\LoginView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -99,11 +102,7 @@
       <DependentUpon>MainView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\MemberDetailView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\MembersView.xaml">
+    <Page Include="Views\NewestView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -111,14 +110,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\UnansweredView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\User.cs" />
-    <Compile Include="Views\MemberDetailView.xaml.cs">
-      <DependentUpon>MemberDetailView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\MembersView.xaml.cs">
-      <DependentUpon>MembersView.xaml</DependentUpon>
+    <Compile Include="Views\NewestView.xaml.cs">
+      <DependentUpon>NewestView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\Model.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">

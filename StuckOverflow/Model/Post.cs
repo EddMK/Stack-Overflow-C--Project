@@ -37,7 +37,6 @@ namespace prbd_1920_xyy
 
                 TimeSpan interval = now - DateTime;
                 string ret = "";
-                Console.WriteLine(interval.TotalDays);
                 if (interval.TotalDays <= 1)
                 {
                     

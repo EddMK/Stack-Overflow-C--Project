@@ -22,11 +22,15 @@
         <TabControl x:Name="tabControl" Margin="10" Grid.Row="1">
             <TabItem x:Name="membersTab" Header="Newest">
                 <ContentControl>
-                    <local:MembersView/>
+                    <local:NewestView/>
                 </ContentControl>
             </TabItem>
             <TabItem Header="Active" />
-            <TabItem Header="Unanswered" />
+            <TabItem Header="Unanswered" >
+                <ContentControl>
+                    <local:UnansweredView/>
+                </ContentControl>
+            </TabItem>
             <TabItem Header="Votes" />
         </TabControl>
     </Grid>
