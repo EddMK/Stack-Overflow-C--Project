@@ -10,14 +10,16 @@ namespace prbd_1920_xyy
     {
         [Key]
         public int PostId { get; set; }
-        public  int AuthorId { get; set; }
         public string Title { get; set; }
         public string Body { get; set; }
         public DateTime DateTime { get; set; }
         public int AcceptedAnswerId { get; set; }
-        public int ParentId { get; set; }
 
-        public virtual User Author { get; set; }
+        public virtual User AuthorId { get; set; }
+        public virtual Post ParentId { get; set; }
+
+        public virtual ICollection<Post> AnsweredQuestions { get; set; } =
+            new HashSet<Post>();
 
         protected Post() { }
 
@@ -39,9 +41,9 @@ namespace prbd_1920_xyy
                 if (interval.TotalDays <= 1)
                 {
                     
-                    if (interval.TotalHours == 0)
+                    if (interval.TotalHours <= 1)
                     {
-                        if (interval.TotalMinutes == 0)
+                        if (interval.TotalMinutes <= 1)
                         {
                             ret = interval.Seconds + " secondes ago ";
                         }

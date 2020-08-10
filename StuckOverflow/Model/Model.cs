@@ -30,8 +30,8 @@ namespace prbd_1920_xyy {
             return member;
         }
 
-        public Post CreatePost(int AuthorId,string Title, string Body, DateTime Date,
-            int AcceptedAnswerId, int ParentId)
+        public Post CreatePost(User AuthorId,string Title, string Body, DateTime Date,
+            int AcceptedAnswerId, Post ParentId)
         {
             var post = Posts.Create();
             post.AuthorId = AuthorId;
@@ -40,6 +40,31 @@ namespace prbd_1920_xyy {
             post.DateTime = Date;
             post.AcceptedAnswerId = AcceptedAnswerId;
             post.ParentId = ParentId;
+            Posts.Add(post);
+            return post;
+        }
+
+        public Post CreateQuestion(User AuthorId, string Title, string Body, DateTime Date,
+            int AcceptedAnswerId)
+        {
+            var post = Posts.Create();
+            post.AuthorId = AuthorId;
+            post.Title = Title;
+            post.Body = Body;
+            post.DateTime = Date;
+            post.AcceptedAnswerId = AcceptedAnswerId;
+            Posts.Add(post);
+            return post;
+        }
+
+        public Post CreateAnswer(User AuthorId, string Body, DateTime Date, Post ParentId)
+        {
+            var post = Posts.Create();
+            post.AuthorId = AuthorId;
+            post.Body = Body;
+            post.DateTime = Date;
+            post.ParentId = ParentId;
+            ParentId.AnsweredQuestions.Add(post);
             Posts.Add(post);
             return post;
         }
@@ -55,10 +80,19 @@ namespace prbd_1920_xyy {
             }
             if (Posts.Count() == 0) {
                 Console.Write("Seeding members... ");
-                var q1 = CreatePost(2,"Etre ou ne pas être ?","Question philosophique",
-                    DateTime.Now,0,0);
-                var q2 = CreatePost(3,"Q2","Q2",
-                    DateTime.Now,0,0);
+                var member = App.Model.Users.Find(2);
+                var member2 = App.Model.Users.Find(3);
+                var q1 = CreateQuestion(member, "Etre ou ne pas être ?","Question philosophique",
+                    DateTime.Now,0);
+                member.PostWritten.Add(q1);
+                
+                var q3 = CreateAnswer(member, "Etre",
+                    DateTime.Now, q1);
+                member.PostWritten.Add(q3);
+                
+                var q2 = CreateQuestion(member2, "Q2","Q2",
+                    DateTime.Now,0);
+                member2.PostWritten.Add(q2);
                 SaveChanges();
                 Console.WriteLine("ok");
             }

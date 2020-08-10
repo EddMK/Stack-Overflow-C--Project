@@ -16,7 +16,7 @@ namespace prbd_1920_xyy {
         public string Email { get; set; }
         public Role Role { get; set; }
 
-        [InverseProperty(nameof(Post.Author))]
+        [InverseProperty(nameof(Post.AuthorId))]
         public virtual ICollection<Post> PostWritten { get; set; } =
             new HashSet<Post>();
 
