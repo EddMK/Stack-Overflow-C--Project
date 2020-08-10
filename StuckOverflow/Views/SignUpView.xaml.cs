@@ -45,7 +45,7 @@ namespace prbd_1920_xyy
         private bool ValidatePseudo()
         {
             ClearErrors();
-            var member = App.Model.Members.Find(Pseudo);
+            var member = App.Model.Users.Find(Pseudo);
             if (string.IsNullOrEmpty(Pseudo))
             {
                 AddError("Pseudo", Properties.Resources.Error_Required);
@@ -124,10 +124,10 @@ namespace prbd_1920_xyy
         {
             if (!HasErrors)
             {
-                var newmember = App.Model.CreateMember(Pseudo, Password);
-                App.Model.Members.Add(newmember);
+                var newmember = App.Model.CreateUser(Pseudo, Password,Pseudo,Pseudo);
+                App.Model.Users.Add(newmember);
                 App.Model.SaveChanges();
-                Console.Write(App.Model.Members);
+                Console.Write(App.Model.Users);
                 App.CurrentUser = newmember; // le membre connecté devient le membre courant
                 ShowMainView(); // ouverture de la fenêtre principale
                 Close(); // fermeture de la fenêtre de login

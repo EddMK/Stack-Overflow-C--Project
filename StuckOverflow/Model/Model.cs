@@ -17,15 +17,16 @@ namespace prbd_1920_xyy {
             Database.SetInitializer<Model>(new DropCreateDatabaseIfModelChanges<Model>());
         }
 
-        public DbSet<Member> Members { get; set; }
+        public DbSet<User> Users { get; set; }
         public DbSet<Post> Posts { get; set; }
 
-        public Member CreateMember(string pseudo, string password, Role role = Role.Member) {
-            var member = Members.Create();
-            member.Pseudo = pseudo;
+        public User CreateUser(string username, string password, string fullname, string email, Role role = Role.Member) {
+            var member = Users.Create();
+            member.UserName = username;
             member.Password = password;
-            member.Role = role;
-            Members.Add(member);
+            member.FullName = fullname;
+            member.Email = email;
+            Users.Add(member);
             return member;
         }
 
@@ -44,11 +45,11 @@ namespace prbd_1920_xyy {
         }
 
         public void SeedData() {
-            if (Members.Count() == 0) {
+            if (Users.Count() == 0) {
                 Console.Write("Seeding members... ");
-                var admin = CreateMember("admin", "admin", Role.Admin);
-                var ben = CreateMember("ben", "ben");
-                var bruno = CreateMember("bruno", "bruno");
+                var admin = CreateUser("admin", "admin","administrateur" ,"admin@admin.com",Role.Admin);
+                var ben = CreateUser("ben", "ben","benjamin","ben@ben.com");
+                var bruno = CreateUser("bruno", "bruno","bruno","bruno@bruno.com");
                 SaveChanges();
                 Console.WriteLine("ok");
             }

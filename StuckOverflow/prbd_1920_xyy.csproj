@@ -113,7 +113,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\Member.cs" />
+    <Compile Include="Model\User.cs" />
     <Compile Include="Views\MemberDetailView.xaml.cs">
       <DependentUpon>MemberDetailView.xaml</DependentUpon>
     </Compile>

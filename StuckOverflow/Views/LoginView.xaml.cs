@@ -31,13 +31,14 @@ namespace prbd_1920_xyy {
 
         public override bool Validate() {
             ClearErrors();
-            var member = App.Model.Members.Find(Pseudo);
-            if (!ValidateLogin(member) || !ValidatePwd(member))
+            User myUser = App.Model.Users.SingleOrDefault(user => user.UserName == Pseudo);
+
+            if (!ValidateLogin(myUser) || !ValidatePwd(myUser))
                 RaiseErrors();
             return !HasErrors;
         }
 
-        private bool ValidateLogin(Member member) {
+        private bool ValidateLogin(User member) {
             if (string.IsNullOrEmpty(Pseudo)) {
                 AddError("Pseudo", Properties.Resources.Error_Required);
             }
@@ -54,7 +55,7 @@ namespace prbd_1920_xyy {
             return !HasErrors;
         }
 
-        private bool ValidatePwd(Member member) {
+        private bool ValidatePwd(User member) {
             if (string.IsNullOrEmpty(Password)) {
                 AddError("Password", Properties.Resources.Error_Required);
             }
@@ -65,8 +66,8 @@ namespace prbd_1920_xyy {
         }
         private void LoginAction() {
             if (Validate()) { // si aucune erreurs
-                var member = App.Model.Members.Find(Pseudo); // on recherche le membre 
-                App.CurrentUser = member; // le membre connecté devient le membre courant
+                User myUser = App.Model.Users.SingleOrDefault(user => user.UserName == Pseudo);
+                App.CurrentUser = myUser; // le membre connecté devient le membre courant
                 ShowMainView(); // ouverture de la fenêtre principale
                 Close(); // fermeture de la fenêtre de login
             }

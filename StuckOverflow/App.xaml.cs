@@ -22,7 +22,7 @@ namespace prbd_1920_xyy {
 
         public static readonly string IMAGE_PATH =
             Path.GetFullPath(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "/../../images");
-        public static Member CurrentUser { get; set; }
+        public static User CurrentUser { get; set; }
 
         public static void CancelChanges() {
             Model.Dispose(); // Retire de la mémoire le modèle actuel

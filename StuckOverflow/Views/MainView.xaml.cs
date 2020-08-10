@@ -15,22 +15,22 @@ namespace prbd_1920_xyy {
             
             DataContext = this;
 
-            App.Register<Member>(this, AppMessages.MSG_DISPLAY_MEMBER, m => {
+            App.Register<User>(this, AppMessages.MSG_DISPLAY_MEMBER, m => {
                 TabOfMember(m, false);
             });
 
             Logout = new RelayCommand(LogoutAction);
         }
 
-        private void TabOfMember(Member m, bool isNew) {
+        private void TabOfMember(User m, bool isNew) {
             foreach (TabItem t in tabControl.Items) {
-                if (t.Header.ToString().Equals(m.Pseudo)) {
+                if (t.Header.ToString().Equals(m.UserName)) {
                     Dispatcher.InvokeAsync(() => t.Focus());
                     return;
                 }
             }
             var tab = new TabItem() {
-                Header = isNew ? "<new member>" : m.Pseudo,
+                Header = isNew ? "<new member>" : m.UserName,
                 Content = new MemberDetailView(m)
             };
             tabControl.Items.Add(tab);

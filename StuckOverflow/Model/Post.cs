@@ -17,7 +17,7 @@ namespace prbd_1920_xyy
         public int AcceptedAnswerId { get; set; }
         public int ParentId { get; set; }
 
-        public virtual Member Author { get; set; }
+        public virtual User Author { get; set; }
 
         protected Post() { }
 
@@ -35,8 +35,10 @@ namespace prbd_1920_xyy
 
                 TimeSpan interval = now - DateTime;
                 string ret = "";
-                if (interval.TotalDays == 0)
+                Console.WriteLine(interval.TotalDays);
+                if (interval.TotalDays <= 1)
                 {
+                    
                     if (interval.TotalHours == 0)
                     {
                         if (interval.TotalMinutes == 0)

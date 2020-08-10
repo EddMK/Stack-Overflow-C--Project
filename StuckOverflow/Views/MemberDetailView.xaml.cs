@@ -9,9 +9,9 @@ using System.Windows.Input;
 namespace prbd_1920_xyy {
     public partial class MemberDetailView : UserControlBase {
 
-        public Member Member { get; set; }
+        public User Member { get; set; }
 
-        public MemberDetailView(Member member) {
+        public MemberDetailView(User member) {
             InitializeComponent();
             DataContext = this;
             Member = member;
