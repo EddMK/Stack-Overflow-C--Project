@@ -19,6 +19,7 @@ namespace prbd_1920_xyy {
 
         public DbSet<User> Users { get; set; }
         public DbSet<Post> Posts { get; set; }
+        public DbSet<Vote> Votes { get; set; }
 
         public User CreateUser(string username, string password, string fullname, string email, Role role = Role.Member) {
             var member = Users.Create();
@@ -31,7 +32,7 @@ namespace prbd_1920_xyy {
         }
 
         public Post CreatePost(User AuthorId,string Title, string Body, DateTime Date,
-            int AcceptedAnswerId, Post ParentId)
+            Post AcceptedAnswerId, Post ParentId)
         {
             var post = Posts.Create();
             post.AuthorId = AuthorId;
@@ -45,7 +46,7 @@ namespace prbd_1920_xyy {
         }
 
         public Post CreateQuestion(User AuthorId, string Title, string Body, DateTime Date,
-            int AcceptedAnswerId)
+            Post AcceptedAnswerId)
         {
             var post = Posts.Create();
             post.AuthorId = AuthorId;
@@ -55,6 +56,15 @@ namespace prbd_1920_xyy {
             post.AcceptedAnswerId = AcceptedAnswerId;
             Posts.Add(post);
             return post;
+        }
+
+        public Vote CreateVote(User UserId, Post PostId, int UpDown)
+        {
+            var vote = Votes.Create();
+            vote.UserId = UserId;
+            vote.PostId = PostId;
+            vote.UpDown = UpDown;
+            return vote;
         }
 
         public Post CreateAnswer(User AuthorId, string Body, DateTime Date, Post ParentId)
@@ -69,30 +79,50 @@ namespace prbd_1920_xyy {
             return post;
         }
 
-        public void SeedData() {
-            if (Users.Count() == 0) {
+        public void SeedData()
+        {
+            if (Users.Count() == 0)
+            {
                 Console.Write("Seeding members... ");
-                var admin = CreateUser("admin", "admin","administrateur" ,"admin@admin.com",Role.Admin);
-                var ben = CreateUser("ben", "ben","benjamin","ben@ben.com");
-                var bruno = CreateUser("bruno", "bruno","bruno","bruno@bruno.com");
+                var admin = CreateUser("admin", "admin", "administrateur", "admin@admin.com", Role.Admin);
+                var ben = CreateUser("ben", "ben", "benjamin", "ben@ben.com");
+                var bruno = CreateUser("bruno", "bruno", "bruno", "bruno@bruno.com");
                 SaveChanges();
                 Console.WriteLine("ok");
             }
-            if (Posts.Count() == 0) {
+            if (Posts.Count() == 0)
+            {
                 Console.Write("Seeding members... ");
                 var member = App.Model.Users.Find(2);
                 var member2 = App.Model.Users.Find(3);
-                var q1 = CreateQuestion(member, "Etre ou ne pas être ?","Question philosophique",
-                    DateTime.Now,0);
+                var q1 = CreateQuestion(member, "Etre ou ne pas être ?", "Question philosophique",
+                    DateTime.Now, null);
                 member.PostWritten.Add(q1);
-                
+
                 var q3 = CreateAnswer(member, "Etre",
                     DateTime.Now, q1);
                 member.PostWritten.Add(q3);
-                
-                var q2 = CreateQuestion(member2, "Q2","Q2",
-                    DateTime.Now,0);
+
+                var q2 = CreateQuestion(member2, "Q2", "Q2",
+                    DateTime.Now, null);
                 member2.PostWritten.Add(q2);
+                SaveChanges();
+                Console.WriteLine("ok");
+            }
+            if (Votes.Count() == 0)
+            {
+                Console.Write("Seeding members... ");
+                var member = App.Model.Users.Find(1);
+                var member2 = App.Model.Users.Find(2);
+                var member3 = App.Model.Users.Find(3);
+                var p1 = App.Model.Posts.Find(1);
+                var p2 = App.Model.Posts.Find(2);
+                var p3 = App.Model.Posts.Find(3);
+                var v1 = CreateVote(member, p1, 1);
+                var v2 = CreateVote(member2, p1, 1);
+                var v3 = CreateVote(member3, p1, -1);
+                var v4 = CreateVote(member2, p3, 1);
+                var v5 = CreateVote(member3, p2, 1);
                 SaveChanges();
                 Console.WriteLine("ok");
             }

@@ -13,7 +13,7 @@ namespace prbd_1920_xyy
         public string Title { get; set; }
         public string Body { get; set; }
         public DateTime DateTime { get; set; }
-        public int AcceptedAnswerId { get; set; }
+        public virtual Post AcceptedAnswerId { get; set; }
 
         public virtual User AuthorId { get; set; }
         public virtual Post ParentId { get; set; }

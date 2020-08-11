@@ -26,7 +26,7 @@ namespace prbd_1920_xyy
         private void Refresh()
         {
             var q1 = from m in App.Model.Posts
-                     where m.Title != null && m.AcceptedAnswerId == 0
+                     where m.Title != null && m.AcceptedAnswerId == null
                      orderby m.DateTime descending
                      select m;
             Posts = new ObservableCollection<Post>(q1);
