@@ -16,10 +16,16 @@ namespace prbd_1920_xyy
         public virtual Post AcceptedAnswerId { get; set; }
 
         public virtual User AuthorId { get; set; }
+
         public virtual Post ParentId { get; set; }
+
 
         public virtual ICollection<Post> AnsweredQuestions { get; set; } =
             new HashSet<Post>();
+
+        [InverseProperty(nameof(Vote.PostId))]
+        public virtual ICollection<Vote> Votes { get; set; } =
+            new HashSet<Vote>();
 
         protected Post() { }
 

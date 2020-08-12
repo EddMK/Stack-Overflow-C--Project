@@ -58,12 +58,15 @@ namespace prbd_1920_xyy {
             return post;
         }
 
-        public Vote CreateVote(User UserId, Post PostId, int UpDown)
+        public Vote CreateVote(User User, Post Post, int UpDown)
         {
             var vote = Votes.Create();
-            vote.UserId = UserId;
-            vote.PostId = PostId;
+            vote.UserId = User;
+            vote.PostId = Post;
             vote.UpDown = UpDown;
+            User.Votes.Add(vote);
+            Post.Votes.Add(vote);
+            Votes.Add(vote);
             return vote;
         }
 
@@ -111,6 +114,7 @@ namespace prbd_1920_xyy {
             }
             if (Votes.Count() == 0)
             {
+                
                 Console.Write("Seeding members... ");
                 var member = App.Model.Users.Find(1);
                 var member2 = App.Model.Users.Find(2);
@@ -125,6 +129,7 @@ namespace prbd_1920_xyy {
                 var v5 = CreateVote(member3, p2, 1);
                 SaveChanges();
                 Console.WriteLine("ok");
+                
             }
         }
     }

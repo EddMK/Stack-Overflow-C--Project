@@ -17,9 +17,10 @@ namespace prbd_1920_xyy {
         public Role Role { get; set; }
 
         [InverseProperty(nameof(Post.AuthorId))]
-        public virtual ICollection<Post> PostWritten { get; set; } =
-            new HashSet<Post>();
+        public virtual ICollection<Post> PostWritten { get; set; } = new HashSet<Post>();
 
+        [InverseProperty(nameof(Vote.UserId))]
+        public virtual ICollection<Vote> Votes { get; set; } = new HashSet<Vote>();
         protected User() { }
 
         public override string ToString() {
