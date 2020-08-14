@@ -154,6 +154,9 @@
     <Compile Include="Views\UnansweredView.xaml.cs">
       <DependentUpon>UnansweredView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\VotesView.xaml.cs">
+      <DependentUpon>VotesView.xaml</DependentUpon>
+    </Compile>
     <Page Include="Views\LoginView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -182,6 +185,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\UnansweredView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\VotesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

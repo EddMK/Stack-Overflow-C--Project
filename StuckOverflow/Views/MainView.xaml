@@ -31,7 +31,11 @@
                     <local:UnansweredView/>
                 </ContentControl>
             </TabItem>
-            <TabItem Header="Votes" />
+            <TabItem Header="Votes" >
+                <ContentControl>
+                    <local:VotesView/>
+                </ContentControl>
+            </TabItem>
         </TabControl>
     </Grid>
 </f:WindowBase>
