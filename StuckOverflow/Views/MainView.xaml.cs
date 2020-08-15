@@ -9,6 +9,7 @@ namespace prbd_1920_xyy {
     public partial class MainView : WindowBase {
 
         public ICommand Logout { get; set; }
+        public ICommand Tags { get; set; }
 
         public MainView() {
             InitializeComponent();
@@ -20,6 +21,8 @@ namespace prbd_1920_xyy {
             });
 
             Logout = new RelayCommand(LogoutAction);
+
+            Tags = new RelayCommand(TagsAction);
         }
 
         private void TabOfMember(User m, bool isNew) {
@@ -68,6 +71,18 @@ namespace prbd_1920_xyy {
             for (int i = tabControl.Items.Count - 1; i > 0; i--) 
                 tabControl.Items.RemoveAt(i);
             Login();
+        }
+        
+        private void TagsAction() {
+            var tab = new TabItem()
+            {
+                Header = "Tags",
+                Content = new TagsView()
+            };
+            // ajoute ce onglet à la liste des onglets existant du TabControl
+            tabControl.Items.Add(tab);
+            // exécute la méthode Focus() de l'onglet pour lui donner le focus (càd l'activer)
+            Dispatcher.InvokeAsync(() => tab.Focus());
         }
     }
 }

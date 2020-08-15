@@ -17,6 +17,7 @@
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         <Menu>
+            <MenuItem Header="Tags" Command="{Binding Tags}"/>
             <MenuItem Header="{x:Static p:Resources.Menu_Logout}" Command="{Binding Logout}"/>
         </Menu>
         <TabControl x:Name="tabControl" Margin="10" Grid.Row="1">

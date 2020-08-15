@@ -20,6 +20,7 @@ namespace prbd_1920_xyy {
         public DbSet<User> Users { get; set; }
         public DbSet<Post> Posts { get; set; }
         public DbSet<Vote> Votes { get; set; }
+        public DbSet<Tag> Tags { get; set; }
 
         public User CreateUser(string username, string password, string fullname, string email, Role role = Role.Member) {
             var member = Users.Create();
@@ -82,6 +83,14 @@ namespace prbd_1920_xyy {
             return post;
         }
 
+        public Tag CreateTag(string tagName)
+        {
+            var tag = Tags.Create();
+            tag.TagName = tagName;
+            Tags.Add(tag);
+            return tag;
+        }
+
         public void SeedData()
         {
             if (Users.Count() == 0)
@@ -131,6 +140,15 @@ namespace prbd_1920_xyy {
                 Console.WriteLine("ok");
                 
             }
+            if (Tags.Count() == 0)
+            {
+                Console.Write("Seeding members... ");
+                var t1 = CreateTag("Angular");
+                SaveChanges();
+                Console.WriteLine("ok");
+
+            }
+
         }
     }
 }
