@@ -1,10 +1,15 @@
 ﻿using PRBD_Framework;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace prbd_1920_xyy
 {
@@ -46,6 +51,7 @@ namespace prbd_1920_xyy
         }
 
         public ICommand Add { get; set; }
+        public ICommand Edit { get; set; }
 
         public TagsView()
         {
@@ -53,10 +59,14 @@ namespace prbd_1920_xyy
 
             DataContext = this;
 
-            Refresh();
+            
 
             Add = new RelayCommand(AddTag,
                 () => { return newTag != null  && !HasErrors; });
+
+            Edit = new RelayCommand(() => EditClick());
+
+            Refresh();
         }
 
         public void AddTag()
@@ -70,16 +80,6 @@ namespace prbd_1920_xyy
                 this.txtNewTag.Clear();
                 Refresh();
                 ClearErrors();
-                
-                /*
-                var newmember = App.Model.CreateUser(Pseudo, Password, Pseudo, Pseudo);
-                App.Model.Users.Add(newmember);
-                App.Model.SaveChanges(); 
-                Console.Write(App.Model.Users);
-                App.CurrentUser = newmember; // le membre connecté devient le membre courant
-                ShowMainView(); // ouverture de la fenêtre principale
-                Close(); // fermeture de la fenêtre de login
-                */
             }
         }
 
@@ -94,6 +94,56 @@ namespace prbd_1920_xyy
                 data.Add(item);
             Tags = data;
         }
+
+        private void EditClick()
+        {
+            //Console.WriteLine("Here we are !");
+            var currentRowIndex = datagridtag.Items.IndexOf(datagridtag.CurrentItem);
+            TextBlock id = datagridtag.Columns[0].GetCellContent(datagridtag.Items[currentRowIndex]) as TextBlock;
+            TextBlock name = datagridtag.Columns[1].GetCellContent(datagridtag.Items[currentRowIndex]) as TextBlock;
+            
+            string editTag = name.Text;
+            int tagid = Int32.Parse(id.Text);
+
+            string error = "";
+            if (string.IsNullOrEmpty(editTag))
+            {
+                error += "Not empty";
+            }
+            else
+            {
+                if (string.IsNullOrWhiteSpace(editTag))
+                {
+                    error += "Not white space";
+                }
+                else
+                {
+                    Tag tagCurrent = App.Model.Tags.SingleOrDefault(tag => tag.TagName == editTag);
+                    if (tagCurrent != null)
+                    {
+                        error += "Already exists";
+
+                    }
+                }
+            }
+
+            if (error.Length == 0)
+            {
+                var tag = App.Model.Tags.Find(tagid);
+                tag.TagName = editTag;
+                App.Model.SaveChanges();
+                Refresh();
+            }
+            else
+            {
+                MessageBox.Show(error);
+                Refresh();
+            }
+            
+        }
+
+        
+
 
     }
 }
