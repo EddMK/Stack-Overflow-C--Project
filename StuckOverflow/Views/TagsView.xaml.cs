@@ -52,6 +52,7 @@ namespace prbd_1920_xyy
 
         public ICommand Add { get; set; }
         public ICommand Edit { get; set; }
+        public ICommand Delete { get; set; }
 
         public TagsView()
         {
@@ -65,6 +66,8 @@ namespace prbd_1920_xyy
                 () => { return newTag != null  && !HasErrors; });
 
             Edit = new RelayCommand(() => EditClick());
+            
+            Delete = new RelayCommand(() => DeleteClick());
 
             Refresh();
         }
@@ -142,7 +145,31 @@ namespace prbd_1920_xyy
             
         }
 
-        
+        private void DeleteClick()
+        {
+            var currentRowIndex = datagridtag.Items.IndexOf(datagridtag.CurrentItem);
+            TextBlock id = datagridtag.Columns[0].GetCellContent(datagridtag.Items[currentRowIndex]) as TextBlock;
+            int tagid = Int32.Parse(id.Text);
+
+            MessageBoxResult result = MessageBox.Show("Are you sure you want to delete", "Delete", MessageBoxButton.YesNo);
+            switch (result)
+            {
+                case MessageBoxResult.Yes:
+                    //MessageBox.Show("Hello to you too!", "My App");
+                    var tag = App.Model.Tags.Find(tagid);
+                    App.Model.Tags.Remove(tag);
+                    App.Model.SaveChanges();
+                    Refresh();
+                    break;
+                /*
+                case MessageBoxResult.No:
+                    //MessageBox.Show("Oh well, too bad!", "My App");
+                    break;*/
+            }
+        }
+
+
+
 
 
     }
