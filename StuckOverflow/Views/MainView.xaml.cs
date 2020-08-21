@@ -3,6 +3,7 @@ using System;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
 using System.Windows.Input;
 
 namespace prbd_1920_xyy {
@@ -10,19 +11,43 @@ namespace prbd_1920_xyy {
 
         public ICommand Logout { get; set; }
         public ICommand Tags { get; set; }
+        public ICommand Ask { get; set; }
 
         public MainView() {
             InitializeComponent();
             
             DataContext = this;
 
+
+
             App.Register<User>(this, AppMessages.MSG_DISPLAY_MEMBER, m => {
                 TabOfMember(m, false);
+            });
+
+            App.Register(this, AppMessages.MSG_DELETE_TAGVIEUW, () => {
+                int index = 0;
+                foreach (TabItem tabitem in tabControl.Items)
+                {
+                    if (tabitem.Header.Equals("Tags"))
+                    {
+                        index = tabControl.Items.IndexOf(tabitem);
+                    }
+                }
+                tabControl.Items.RemoveAt(index);
+
+                foreach (TabItem tabitem in tabControl.Items)
+                {
+                    if (tabitem.Header.Equals("Newest"))
+                    {
+                        Dispatcher.InvokeAsync(() => tabitem.Focus());
+                    }
+                }
             });
 
             Logout = new RelayCommand(LogoutAction);
 
             Tags = new RelayCommand(TagsAction);
+            Ask = new RelayCommand(AskAction);
         }
 
         private void TabOfMember(User m, bool isNew) {
@@ -74,15 +99,50 @@ namespace prbd_1920_xyy {
         }
         
         private void TagsAction() {
+            Boolean exist = false;
+            foreach (TabItem tabitem in tabControl.Items)
+            {
+                if (tabitem.Header.Equals("Tags"))
+                {
+                    exist = true;
+                }
+            }
             var tab = new TabItem()
             {
                 Header = "Tags",
                 Content = new TagsView()
             };
-            // ajoute ce onglet à la liste des onglets existant du TabControl
-            tabControl.Items.Add(tab);
-            // exécute la méthode Focus() de l'onglet pour lui donner le focus (càd l'activer)
-            Dispatcher.InvokeAsync(() => tab.Focus());
+            if (!exist)
+            {
+                // ajoute ce onglet à la liste des onglets existant du TabControl
+                tabControl.Items.Add(tab);
+                // exécute la méthode Focus() de l'onglet pour lui donner le focus (càd l'activer)
+                Dispatcher.InvokeAsync(() => tab.Focus());
+            }
+        }
+
+        private void AskAction()
+        {
+            Boolean exist = false;
+            foreach (TabItem tabitem in tabControl.Items)
+            {
+                if (tabitem.Header.Equals("Ask"))
+                {
+                    exist = true;
+                }
+            }
+            var tab = new TabItem()
+            {
+                Header = "Ask",
+                Content = new AskView()
+            };
+            if (!exist)
+            {
+                // ajoute ce onglet à la liste des onglets existant du TabControl
+                tabControl.Items.Add(tab);
+                // exécute la méthode Focus() de l'onglet pour lui donner le focus (càd l'activer)
+                Dispatcher.InvokeAsync(() => tab.Focus());
+            }
         }
     }
 }

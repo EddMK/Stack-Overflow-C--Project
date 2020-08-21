@@ -53,6 +53,7 @@ namespace prbd_1920_xyy
         public ICommand Add { get; set; }
         public ICommand Edit { get; set; }
         public ICommand Delete { get; set; }
+        public ICommand Back { get; set; }
 
         public TagsView()
         {
@@ -69,7 +70,17 @@ namespace prbd_1920_xyy
             
             Delete = new RelayCommand(() => DeleteClick());
 
+            Back = new RelayCommand(() => {
+                App.NotifyColleagues(AppMessages.MSG_DELETE_TAGVIEUW);
+            });
+
             Refresh();
+            if (App.CurrentUser.Role == Role.Member)
+            {
+                            //YourDataGrid.Columns[IndexOftheColumn].Visibility = Visibility.Collapsed;
+                            datagridtag.Columns[0].Visibility = Visibility.Collapsed;
+            }
+
         }
 
         public void AddTag()
@@ -155,22 +166,12 @@ namespace prbd_1920_xyy
             switch (result)
             {
                 case MessageBoxResult.Yes:
-                    //MessageBox.Show("Hello to you too!", "My App");
                     var tag = App.Model.Tags.Find(tagid);
                     App.Model.Tags.Remove(tag);
                     App.Model.SaveChanges();
                     Refresh();
                     break;
-                /*
-                case MessageBoxResult.No:
-                    //MessageBox.Show("Oh well, too bad!", "My App");
-                    break;*/
             }
         }
-
-
-
-
-
     }
 }

@@ -17,6 +17,7 @@
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         <Menu>
+            <MenuItem Header="Ask a question" Command="{Binding Ask}"/>
             <MenuItem Header="Tags" Command="{Binding Tags}"/>
             <MenuItem Header="{x:Static p:Resources.Menu_Logout}" Command="{Binding Logout}"/>
         </Menu>

@@ -14,7 +14,7 @@ using System.Windows;
 
 namespace prbd_1920_xyy {
     public enum AppMessages {
-        MSG_DISPLAY_MEMBER,
+        MSG_DISPLAY_MEMBER,MSG_DELETE_TAGVIEUW
     }
 
     public partial class App : ApplicationBase {
