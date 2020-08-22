@@ -20,15 +20,15 @@ namespace prbd_1920_xyy {
 
 
 
-            App.Register<User>(this, AppMessages.MSG_DISPLAY_MEMBER, m => {
-                TabOfMember(m, false);
+            App.Register<Post>(this, AppMessages.MSG_DISPLAY_QUESTION, m => {
+                TabOfMember(m);
             });
 
-            App.Register(this, AppMessages.MSG_DELETE_TAGVIEUW, () => {
+            App.Register<string>(this, AppMessages.MSG_DELETE_VIEUW, m => {
                 int index = 0;
                 foreach (TabItem tabitem in tabControl.Items)
                 {
-                    if (tabitem.Header.Equals("Tags"))
+                    if (tabitem.Header.Equals(m))
                     {
                         index = tabControl.Items.IndexOf(tabitem);
                     }
@@ -50,16 +50,16 @@ namespace prbd_1920_xyy {
             Ask = new RelayCommand(AskAction);
         }
 
-        private void TabOfMember(User m, bool isNew) {
+        private void TabOfMember(Post question) {
             foreach (TabItem t in tabControl.Items) {
-                if (t.Header.ToString().Equals(m.UserName)) {
+                if (t.Header.ToString().Equals("Question")) {
                     Dispatcher.InvokeAsync(() => t.Focus());
                     return;
                 }
             }
             var tab = new TabItem() {
-                Header = isNew ? "<new member>" : m.UserName,
-                //Content = new MemberDetailView(m)
+                Header = "Question Detail",
+                Content = new QuestionDetailsView(question)
             };
             tabControl.Items.Add(tab);
             tab.MouseDown += (o, e) => {

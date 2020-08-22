@@ -71,7 +71,7 @@ namespace prbd_1920_xyy
             Delete = new RelayCommand(() => DeleteClick());
 
             Back = new RelayCommand(() => {
-                App.NotifyColleagues(AppMessages.MSG_DELETE_TAGVIEUW);
+                App.NotifyColleagues(AppMessages.MSG_DELETE_VIEUW,"Tags");
             });
 
             Refresh();

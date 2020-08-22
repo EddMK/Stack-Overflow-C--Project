@@ -144,6 +144,7 @@
     <Compile Include="Model\Post.cs" />
     <Compile Include="Model\Tag.cs" />
     <Compile Include="Model\Vote.cs" />
+    <Compile Include="MyConverter.cs" />
     <Compile Include="Properties\Resources.fr.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -151,6 +152,9 @@
     </Compile>
     <Compile Include="Views\AskView.xaml.cs">
       <DependentUpon>AskView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\QuestionDetailsView.xaml.cs">
+      <DependentUpon>QuestionDetailsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SignUpView.xaml.cs">
       <DependentUpon>SignUpView.xaml</DependentUpon>
@@ -188,6 +192,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Views\NewestView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\QuestionDetailsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

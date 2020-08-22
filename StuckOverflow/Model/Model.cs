@@ -144,6 +144,10 @@ namespace prbd_1920_xyy {
             {
                 Console.Write("Seeding members... ");
                 var t1 = CreateTag("Angular");
+                var t2 = CreateTag("Java");
+                var t3 = CreateTag("Php");
+                var t4 = CreateTag("Sql");
+                var t5 = CreateTag("C++");
                 SaveChanges();
                 Console.WriteLine("ok");
 

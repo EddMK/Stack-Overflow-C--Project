@@ -14,5 +14,7 @@ namespace prbd_1920_xyy
 
         protected Tag() { }
 
+        public virtual ICollection<Post> Posts { get; set; } = new HashSet<Post>();
+
     }
 }

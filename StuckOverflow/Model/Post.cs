@@ -20,6 +20,10 @@ namespace prbd_1920_xyy
         public virtual Post ParentId { get; set; }
 
 
+
+        public virtual ICollection<Tag> Tags { get; set; } = new HashSet<Tag>();
+
+
         public virtual ICollection<Post> AnsweredQuestions { get; set; } =
             new HashSet<Post>();
 
