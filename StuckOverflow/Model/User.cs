@@ -18,6 +18,9 @@ namespace prbd_1920_xyy {
 
         [InverseProperty(nameof(Post.AuthorId))]
         public virtual ICollection<Post> PostWritten { get; set; } = new HashSet<Post>();
+        
+        [InverseProperty(nameof(Comment.UserId))]
+        public virtual ICollection<Comment> CommentWritten { get; set; } = new HashSet<Comment>();
 
         [InverseProperty(nameof(Vote.UserId))]
         public virtual ICollection<Vote> Votes { get; set; } = new HashSet<Vote>();

@@ -141,6 +141,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\Comment.cs" />
     <Compile Include="Model\Post.cs" />
     <Compile Include="Model\Tag.cs" />
     <Compile Include="Model\Vote.cs" />

@@ -21,6 +21,7 @@ namespace prbd_1920_xyy {
         public DbSet<Post> Posts { get; set; }
         public DbSet<Vote> Votes { get; set; }
         public DbSet<Tag> Tags { get; set; }
+        public DbSet<Comment> Comments { get; set; }
 
         public User CreateUser(string username, string password, string fullname, string email, Role role = Role.Member) {
             var member = Users.Create();
@@ -33,20 +34,6 @@ namespace prbd_1920_xyy {
             return member;
         }
 
-        public Post CreatePost(User AuthorId,string Title, string Body, DateTime Date,
-            Post AcceptedAnswerId, Post ParentId)
-        {
-            var post = Posts.Create();
-            post.AuthorId = AuthorId;
-            post.Title = Title;
-            post.Body = Body;
-            post.DateTime = Date;
-            post.AcceptedAnswerId = AcceptedAnswerId;
-            post.ParentId = ParentId;
-            Posts.Add(post);
-            return post;
-        }
-
         public Post CreateQuestion(User AuthorId, string Title, string Body, DateTime Date,
             Post AcceptedAnswerId)
         {
@@ -56,6 +43,7 @@ namespace prbd_1920_xyy {
             post.Body = Body;
             post.DateTime = Date;
             post.AcceptedAnswerId = AcceptedAnswerId;
+            AuthorId.PostWritten.Add(post);
             Posts.Add(post);
             return post;
         }
@@ -72,6 +60,19 @@ namespace prbd_1920_xyy {
             return vote;
         }
 
+        public Comment CreateComment(User User, Post Post, string body, DateTime tpm)
+        {
+            var comment = Comments.Create();
+            comment.UserId = User;
+            comment.PostId = Post;
+            comment.Body = body;
+            comment.DateTime = tpm;
+            User.CommentWritten.Add(comment);
+            Post.CommentAdded.Add(comment);
+            Comments.Add(comment);
+            return comment;
+        }
+
         public Post CreateAnswer(User AuthorId, string Body, DateTime Date, Post ParentId)
         {
             var post = Posts.Create();
@@ -80,6 +81,7 @@ namespace prbd_1920_xyy {
             post.DateTime = Date;
             post.ParentId = ParentId;
             ParentId.AnsweredQuestions.Add(post);
+            AuthorId.PostWritten.Add(post);
             Posts.Add(post);
             return post;
         }
