@@ -23,14 +23,24 @@
                     <TextBlock  Text="{Binding Question.AuthorId.UserName}" />
                 </WrapPanel>
             </StackPanel>
-            <TextBlock  DockPanel.Dock="Left" Text="Vote" ></TextBlock>
+            <StackPanel  DockPanel.Dock="Left">
+                <TextBlock   Text="{Binding Question.GetScore}" ></TextBlock>
+                <RadioButton  Content="+1" Command="{Binding DataContext.Up}" CommandParameter="{Binding Question}"/>
+                <RadioButton  Content="-1" Command="{Binding DataContext.Down}" CommandParameter="{Binding Question}" />
+                <RadioButton  Content="Cancel" Command="{Binding DataContext.Zero}" CommandParameter="{Binding Question}"/>
+            </StackPanel>
             <TextBlock Text="{Binding Question.Body}" Margin="10 0 0 0"/>
         </DockPanel>
         <ItemsControl Grid.Row="1" Name="listanswers"  ItemsSource="{Binding Answers}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <DockPanel>
-                        <TextBlock  DockPanel.Dock="Left" Text="Vote" ></TextBlock>
+                    <DockPanel Margin="20 10 0 0">
+                        <StackPanel  DockPanel.Dock="Left"  Margin="0 0 0 20">
+                            <TextBlock   Text="{Binding GetScore}" ></TextBlock>
+                            <RadioButton  Content="+1" Command="{Binding DataContext.Up, ElementName=listanswers}" CommandParameter="{Binding}"/>
+                            <RadioButton  Content="-1"  Command="{Binding DataContext.Down, ElementName=listanswers}" CommandParameter="{Binding}" />
+                            <RadioButton  Content="Cancel" Command="{Binding DataContext.Zero, ElementName=listanswers}" CommandParameter="{Binding}"/>
+                        </StackPanel>
                         <WrapPanel DockPanel.Dock="Bottom" >
                             <TextBlock  Text="{Binding GetAgo}" />
                             <TextBlock  Text=" answered by " />

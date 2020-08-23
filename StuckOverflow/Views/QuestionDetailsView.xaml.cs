@@ -1,4 +1,5 @@
-﻿using PRBD_Framework;
+﻿using Microsoft.EntityFrameworkCore.Internal;
+using PRBD_Framework;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -28,6 +29,9 @@ namespace prbd_1920_xyy
         }
 
         public ICommand Answer { get; set; }
+        public ICommand Up { get; set; }
+        public ICommand Down { get; set; }
+        public ICommand Zero { get; set; }
 
         public QuestionDetailsView(Post question)
         {
@@ -42,6 +46,73 @@ namespace prbd_1920_xyy
             Answer = new RelayCommand(AnswerAction,
                 () => { return body != null && !HasErrors; });
 
+            Up = new RelayCommand<Post>(param =>UpVote(param));
+            Down = new RelayCommand<Post>(param =>DownVote(param));
+            Zero = new RelayCommand<Post>(param =>ZeroVote(param));
+
+        }
+
+        private int VoteExist(Post post, int valeur)
+        {
+            User connected = App.CurrentUser;
+            Vote v = App.Model.Votes.SingleOrDefault(vote => vote.PostId.PostId == post.PostId &&
+                                                    vote.UserId.UserId == connected.UserId &&
+                                                    vote.UpDown == valeur);
+            if(v == null)
+            {
+                return 0;
+            }
+            else
+            {
+                return App.Model.Votes.IndexOf(v);
+            }
+                        
+        }
+
+        private void UpVote(Post param)
+        {
+            User connected = App.CurrentUser;
+            int index = VoteExist(param, 1);
+            if (index == 0)
+            {
+                App.Model.CreateVote(connected, param, 1);
+                App.Model.SaveChanges();
+            }
+            else
+            {
+                Vote v = App.Model.Votes.Find(index);
+                App.Model.Votes.Remove(v);
+                App.Model.SaveChanges();
+            }
+        }
+        private void DownVote(Post param)
+        {
+            User connected = App.CurrentUser;
+            int index = VoteExist(param, -1);
+            if (index == 0)
+            {
+                App.Model.CreateVote(connected, param, -1);
+                App.Model.SaveChanges();
+            }
+            else
+            {
+                Vote v = App.Model.Votes.Find(index);
+                App.Model.Votes.Remove(v);
+                App.Model.SaveChanges();
+            }
+        }
+        
+        private void ZeroVote(Post param)
+        {
+            User connected = App.CurrentUser;
+            Vote v = App.Model.Votes.SingleOrDefault(vote => vote.PostId.PostId == param.PostId &&
+                                                    vote.UserId.UserId == connected.UserId);
+            
+            if (v != null)
+            {
+                App.Model.Votes.Remove(v);
+                App.Model.SaveChanges();
+            }
         }
 
         public void RefreshAnswers()
@@ -50,7 +121,6 @@ namespace prbd_1920_xyy
                      where m.ParentId.PostId == Question.PostId 
                      orderby m.DateTime descending
                      select m;
-            Console.WriteLine(q1);
             Answers = new ObservableCollection<Post>(q1);
         }
 

@@ -38,6 +38,26 @@ namespace prbd_1920_xyy
             return $"{Title}";
         }
 
+        public string GetScore
+        {
+            get
+            {
+                if(Votes.Count == 0)
+                {
+                    return "0 score";
+                }
+                else
+                {
+                    int somme = 0;
+                    foreach(Vote v in Votes)
+                    {
+                        somme += v.UpDown;
+                    }
+                    return somme + " score(s)";
+                }
+            }
+        }
+
         
         public string GetAgo{
             get
