@@ -32,6 +32,8 @@ namespace prbd_1920_xyy
         public ICommand Up { get; set; }
         public ICommand Down { get; set; }
         public ICommand Zero { get; set; }
+        public ICommand Accept { get; set; }
+        public ICommand CancelAccept { get; set; }
 
         public QuestionDetailsView(Post question)
         {
@@ -49,7 +51,22 @@ namespace prbd_1920_xyy
             Up = new RelayCommand<Post>(param =>UpVote(param));
             Down = new RelayCommand<Post>(param =>DownVote(param));
             Zero = new RelayCommand<Post>(param =>ZeroVote(param));
+            Accept = new RelayCommand<Post>(param =>AcceptAction(param));
+            CancelAccept = new RelayCommand<Post>(param =>CancelAcceptAction(param));
 
+        }
+
+        private void AcceptAction(Post param)
+        {
+            Question.AcceptedAnswerId = param;
+            App.Model.SaveChanges();
+            //Console.WriteLine(param.Body);
+        }
+        private void CancelAcceptAction(Post param)
+        {
+            Question.AcceptedAnswerId = null;
+            App.Model.SaveChanges();
+            //Console.WriteLine(param.Body);
         }
 
         private int VoteExist(Post post, int valeur)

@@ -23,6 +23,8 @@ namespace prbd_1920_xyy {
         public virtual ICollection<Vote> Votes { get; set; } = new HashSet<Vote>();
         protected User() { }
 
+        
+
         public override string ToString() {
             return $"<Member: Pseudo={UserName} >";
         }

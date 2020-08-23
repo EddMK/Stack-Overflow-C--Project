@@ -8,6 +8,10 @@
              xmlns:local="clr-namespace:prbd_1920_xyy"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis" />
+    </UserControl.Resources>
+        
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -21,6 +25,10 @@
                     <TextBlock  Text="{Binding Question.GetAgo}" />
                     <TextBlock  Text=" asked by " />
                     <TextBlock  Text="{Binding Question.AuthorId.UserName}" />
+                    <Button  Content="Edit"  
+                        Visibility="{Binding Question.IsCurrentAuthor, Converter={StaticResource BoolToVis}}" />
+                    <Button  Content="Supprimer" 
+                             Visibility="{Binding Question.IsCurrentAuthor, Converter={StaticResource BoolToVis}}"/>
                 </WrapPanel>
             </StackPanel>
             <StackPanel  DockPanel.Dock="Left">
@@ -40,6 +48,10 @@
                             <RadioButton  Content="+1" Command="{Binding DataContext.Up, ElementName=listanswers}" CommandParameter="{Binding}"/>
                             <RadioButton  Content="-1"  Command="{Binding DataContext.Down, ElementName=listanswers}" CommandParameter="{Binding}" />
                             <RadioButton  Content="Cancel" Command="{Binding DataContext.Zero, ElementName=listanswers}" CommandParameter="{Binding}"/>
+                            <Button  Content="Accept" Command="{Binding DataContext.Accept, ElementName=listanswers}" CommandParameter="{Binding}"
+                             Visibility="{Binding IsNotAccepted, Converter={StaticResource BoolToVis}}"/>
+                            <Button  Content="CancelAccept" Command="{Binding DataContext.CancelAccept, ElementName=listanswers}" CommandParameter="{Binding}"
+                             Visibility="{Binding IsAccepted, Converter={StaticResource BoolToVis}}"/>
                         </StackPanel>
                         <WrapPanel DockPanel.Dock="Bottom" >
                             <TextBlock  Text="{Binding GetAgo}" />

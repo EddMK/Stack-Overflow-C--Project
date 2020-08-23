@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 using PRBD_Framework;
 
 namespace prbd_1920_xyy
@@ -58,7 +59,40 @@ namespace prbd_1920_xyy
             }
         }
 
+        public bool IsCurrentAuthor
+        {
+            get
+            {
+                return App.CurrentUser == this.AuthorId;
+            }
+        }
         
+        public bool IsAccepted
+        {
+            get
+            {
+                Post v = App.Model.Posts.SingleOrDefault(post => post.AcceptedAnswerId.PostId == this.PostId);
+                
+                if (v == null)
+                {
+                    return false;
+                }
+                else
+                {
+                    Console.WriteLine("Accepted " + this.Body);
+                    return true;
+                }
+            }
+        }
+
+        public bool IsNotAccepted
+        {
+            get
+            {
+                return !IsAccepted;
+            }
+        }
+
         public string GetAgo{
             get
             {
