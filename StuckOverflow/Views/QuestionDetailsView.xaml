@@ -9,6 +9,43 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <DockPanel>
+            <StackPanel DockPanel.Dock="Top">
+                <TextBlock  Text="{Binding Question.Title}" />
+                <WrapPanel>
+                    <TextBlock  Text="{Binding Question.GetAgo}" />
+                    <TextBlock  Text=" asked by " />
+                    <TextBlock  Text="{Binding Question.AuthorId.UserName}" />
+                </WrapPanel>
+            </StackPanel>
+            <TextBlock  DockPanel.Dock="Left" Text="Vote" ></TextBlock>
+            <TextBlock Text="{Binding Question.Body}" Margin="10 0 0 0"/>
+        </DockPanel>
+        <ItemsControl Grid.Row="1" Name="listanswers"  ItemsSource="{Binding Answers}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <DockPanel>
+                        <TextBlock  DockPanel.Dock="Left" Text="Vote" ></TextBlock>
+                        <WrapPanel DockPanel.Dock="Bottom" >
+                            <TextBlock  Text="{Binding GetAgo}" />
+                            <TextBlock  Text=" answered by " />
+                            <TextBlock  Text="{Binding AuthorId.UserName}" />
+                        </WrapPanel>
+                        <TextBlock Text="{Binding Body}" Margin="10 0 0 0"/>
+                    </DockPanel>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+        <StackPanel Grid.Row="2" Orientation="Vertical">
+            <TextBox x:Name="textAnswer"  Text="{Binding Body, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" MinLines="5" AcceptsReturn="True" MaxLines="10" VerticalScrollBarVisibility="Auto" VerticalAlignment="Top" />
+            <WrapPanel Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Bottom"  Width="100">
+                <Button x:Name="btnAnswer" Content="Answer" Command="{Binding Answer}" Width="auto" Padding="5,1"/>
+            </WrapPanel>
+        </StackPanel>
     </Grid>
 </f:UserControlBase>
