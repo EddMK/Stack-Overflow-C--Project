@@ -83,7 +83,8 @@ namespace prbd_1920_xyy
         {
             get
             {
-                return App.CurrentUser == this.AuthorId;
+                //Console.WriteLine(App.CurrentUser.Role);
+                return App.CurrentUser == this.AuthorId || App.CurrentUser.Role == Role.Admin;
             }
         }
         
@@ -91,17 +92,12 @@ namespace prbd_1920_xyy
         {
             get
             {
-                Post v = App.Model.Posts.SingleOrDefault(post => post.AcceptedAnswerId.PostId == this.PostId);
-                
-                if (v == null)
+                if (App.CurrentUser == this.AuthorId || App.CurrentUser.Role == Role.Admin)
                 {
-                    return false;
+                    Post v = App.Model.Posts.SingleOrDefault(post => post.AcceptedAnswerId.PostId == this.PostId);
+                    return v != null;
                 }
-                else
-                {
-                    Console.WriteLine("Accepted " + this.Body);
-                    return true;
-                }
+                return false;
             }
         }
 
@@ -109,7 +105,12 @@ namespace prbd_1920_xyy
         {
             get
             {
-                return !IsAccepted;
+                if (App.CurrentUser == this.AuthorId || App.CurrentUser.Role == Role.Admin)
+                {
+                    Post v = App.Model.Posts.SingleOrDefault(post => post.AcceptedAnswerId.PostId == this.PostId);
+                    return v == null;
+                }
+                return false;
             }
         }
 

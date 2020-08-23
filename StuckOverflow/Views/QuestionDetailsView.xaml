@@ -33,11 +33,9 @@
                 <WrapPanel Orientation="Horizontal">
                 <ItemsControl Name="tagsQuestion"  ItemsSource="{Binding Question.Tags}">
                     <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-
+                            <DataTemplate>
                                 <Button Content="{Binding TagName}" />
-                            
-                        </DataTemplate>
+                            </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
                 </WrapPanel>
@@ -68,6 +66,10 @@
                             <TextBlock  Text="{Binding GetAgo}" />
                             <TextBlock  Text=" answered by " />
                             <TextBlock  Text="{Binding AuthorId.UserName}" />
+                            <Button  Content="Edit" Command="{Binding DataContext.Edit, ElementName=listanswers}" CommandParameter="{Binding}"
+                             Visibility="{Binding IsCurrentAuthor, Converter={StaticResource BoolToVis}}"/>
+                            <Button  Content="Delete" Command="{Binding DataContext.Delete, ElementName=listanswers}" CommandParameter="{Binding}"
+                             Visibility="{Binding IsCurrentAuthor, Converter={StaticResource BoolToVis}}"/>
                         </WrapPanel>
                         <TextBlock Text="{Binding Body}" Margin="10 0 0 0"/>
                     </DockPanel>

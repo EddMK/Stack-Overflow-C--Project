@@ -28,6 +28,7 @@ namespace prbd_1920_xyy {
             member.Password = password;
             member.FullName = fullname;
             member.Email = email;
+            member.Role = role;
             Users.Add(member);
             return member;
         }
