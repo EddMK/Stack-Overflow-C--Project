@@ -30,6 +30,17 @@
                     <Button  Content="Supprimer" 
                              Visibility="{Binding Question.IsCurrentAuthor, Converter={StaticResource BoolToVis}}"/>
                 </WrapPanel>
+                <WrapPanel Orientation="Horizontal">
+                <ItemsControl Name="tagsQuestion"  ItemsSource="{Binding Question.Tags}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+
+                                <Button Content="{Binding TagName}" />
+                            
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                </WrapPanel>
             </StackPanel>
             <StackPanel  DockPanel.Dock="Left">
                 <TextBlock   Text="{Binding Question.GetScore}" ></TextBlock>
@@ -50,7 +61,7 @@
                             <RadioButton  Content="Cancel" Command="{Binding DataContext.Zero, ElementName=listanswers}" CommandParameter="{Binding}"/>
                             <Button  Content="Accept" Command="{Binding DataContext.Accept, ElementName=listanswers}" CommandParameter="{Binding}"
                              Visibility="{Binding IsNotAccepted, Converter={StaticResource BoolToVis}}"/>
-                            <Button  Content="CancelAccept" Command="{Binding DataContext.CancelAccept, ElementName=listanswers}" CommandParameter="{Binding}"
+                            <Button  Content="CancelAccept" 
                              Visibility="{Binding IsAccepted, Converter={StaticResource BoolToVis}}"/>
                         </StackPanel>
                         <WrapPanel DockPanel.Dock="Bottom" >

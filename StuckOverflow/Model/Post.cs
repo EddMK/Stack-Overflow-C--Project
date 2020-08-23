@@ -59,6 +59,26 @@ namespace prbd_1920_xyy
             }
         }
 
+        public int GetScores
+        {
+            get
+            {
+                if (Votes.Count == 0)
+                {
+                    return 0;
+                }
+                else
+                {
+                    int somme = 0;
+                    foreach (Vote v in Votes)
+                    {
+                        somme += v.UpDown;
+                    }
+                    return somme;
+                }
+            }
+        }
+
         public bool IsCurrentAuthor
         {
             get

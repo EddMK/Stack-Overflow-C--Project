@@ -64,6 +64,8 @@ namespace prbd_1920_xyy
         }
         private void CancelAcceptAction(Post param)
         {
+            
+            
             Question.AcceptedAnswerId = null;
             App.Model.SaveChanges();
             //Console.WriteLine(param.Body);
@@ -134,11 +136,30 @@ namespace prbd_1920_xyy
 
         public void RefreshAnswers()
         {
-            var q1 = from m in App.Model.Posts
-                     where m.ParentId.PostId == Question.PostId 
-                     orderby m.DateTime descending
-                     select m;
-            Answers = new ObservableCollection<Post>(q1);
+            if (Question.AcceptedAnswerId == null)
+            {
+                var q1 = from m in App.Model.Posts
+                         let scores = m.Votes.Sum( v => v.UpDown)
+                         where m.Title == null && m.ParentId.PostId == Question.PostId
+                         orderby scores descending, m.DateTime descending
+                         select m;
+                Answers = new ObservableCollection<Post>(q1);
+            }
+            else
+            {
+                Post v = App.Model.Posts.SingleOrDefault(post =>  post.PostId == Question.AcceptedAnswerId.PostId);
+                Answers = new ObservableCollection<Post>();
+                Answers.Add(v);
+                var q1 = from m in App.Model.Posts
+                         let scores = m.Votes.Sum( s  => s.UpDown)
+                         where m.Title == null && m.PostId != Question.AcceptedAnswerId.PostId && m.ParentId.PostId == Question.PostId
+                         orderby scores descending, m.DateTime descending
+                         select m;
+                var xlist = new List<Post>();
+                xlist.Add(v);
+                xlist.AddRange(q1.ToList());
+                Answers = new ObservableCollection<Post>(xlist);
+            }
         }
 
         private bool ValidateBody()
