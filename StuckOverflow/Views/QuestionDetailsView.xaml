@@ -46,7 +46,18 @@
                 <RadioButton  Content="-1" Command="{Binding DataContext.Down}" CommandParameter="{Binding Question}" />
                 <RadioButton  Content="Cancel" Command="{Binding DataContext.Zero}" CommandParameter="{Binding Question}"/>
             </StackPanel>
-            <TextBlock Text="{Binding Question.Body}" Margin="10 0 0 0"/>
+            <StackPanel Margin=" 0 0 0 50">
+                <TextBlock Text="{Binding Question.Body}" Margin="10 0 0 10"/>
+                <TextBlock Text="Comments : " Margin="40 0 0 10"/>
+                <ItemsControl Grid.Row="1" Name="listcomments"  ItemsSource="{Binding Question.Comments}" Margin="40 0 0 0">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Body}"/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                <Button x:Name="btnComment" Content="Add Comment" Command="{Binding DataContext.AddComment}" CommandParameter="{Binding Question}" Width="100" />
+            </StackPanel>
         </DockPanel>
         <ItemsControl Grid.Row="1" Name="listanswers"  ItemsSource="{Binding Answers}">
             <ItemsControl.ItemTemplate>

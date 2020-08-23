@@ -151,6 +151,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.fr.resx</DependentUpon>
     </Compile>
+    <Compile Include="Views\AddCommentView.xaml.cs">
+      <DependentUpon>AddCommentView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\AskView.xaml.cs">
       <DependentUpon>AskView.xaml</DependentUpon>
     </Compile>
@@ -169,6 +172,10 @@
     <Compile Include="Views\VotesView.xaml.cs">
       <DependentUpon>VotesView.xaml</DependentUpon>
     </Compile>
+    <Page Include="Views\AddCommentView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\AskView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

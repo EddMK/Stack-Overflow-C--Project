@@ -68,7 +68,7 @@ namespace prbd_1920_xyy {
             comment.Body = body;
             comment.DateTime = tpm;
             User.CommentWritten.Add(comment);
-            Post.CommentAdded.Add(comment);
+            Post.Comments.Add(comment);
             Comments.Add(comment);
             return comment;
         }
@@ -112,15 +112,10 @@ namespace prbd_1920_xyy {
                 var member2 = App.Model.Users.Find(3);
                 var q1 = CreateQuestion(member, "Etre ou ne pas être ?", "Question philosophique",
                     DateTime.Now, null);
-                member.PostWritten.Add(q1);
-
                 var q3 = CreateAnswer(member, "Etre",
                     DateTime.Now, q1);
-                member.PostWritten.Add(q3);
-
                 var q2 = CreateQuestion(member2, "Q2", "Q2",
                     DateTime.Now, null);
-                member2.PostWritten.Add(q2);
                 SaveChanges();
                 Console.WriteLine("ok");
             }
@@ -151,6 +146,24 @@ namespace prbd_1920_xyy {
                 var t3 = CreateTag("Php");
                 var t4 = CreateTag("Sql");
                 var t5 = CreateTag("C++");
+                SaveChanges();
+                Console.WriteLine("ok");
+
+            }
+            if (Comments.Count() == 0)
+            {
+                Console.Write("Seeding members... ");
+                DateTime now = new DateTime();
+                now = DateTime.Now;
+                var member = App.Model.Users.Find(1);
+                var member2 = App.Model.Users.Find(2);
+                var member3 = App.Model.Users.Find(3);
+                var p1 = App.Model.Posts.Find(1);
+                var p2 = App.Model.Posts.Find(2);
+                var p3 = App.Model.Posts.Find(3);
+                var c1 = CreateComment(member, p1, "c1", now);
+                var c2 = CreateComment(member2, p2, "c2", now);
+                var c3 = CreateComment(member3, p3, "c3", now);
                 SaveChanges();
                 Console.WriteLine("ok");
 

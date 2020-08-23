@@ -1,0 +1,19 @@
+﻿<f:UserControlBase x:Class="prbd_1920_xyy.AddCommentView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:f="clr-namespace:PRBD_Framework;assembly=PRBD_Framework"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:local="clr-namespace:prbd_1920_xyy"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <StackPanel Grid.Row="2" Orientation="Vertical">
+            <TextBox x:Name="textAdd"  Text="{Binding Body, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" MinLines="5" AcceptsReturn="True" MaxLines="10" VerticalScrollBarVisibility="Auto" VerticalAlignment="Top" />
+            <WrapPanel Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Bottom"  Width="100">
+                <Button x:Name="btnAddComment" Content="Add Comment" Command="{Binding Add}" Width="auto" Padding="5,1"/>
+            </WrapPanel>
+        </StackPanel>
+    </Grid>
+</f:UserControlBase>

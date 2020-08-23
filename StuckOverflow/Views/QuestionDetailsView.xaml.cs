@@ -28,12 +28,14 @@ namespace prbd_1920_xyy
             set => SetProperty<string>(ref body, value, () => ValidateBody());
         }
 
+
         public ICommand Answer { get; set; }
         public ICommand Up { get; set; }
         public ICommand Down { get; set; }
         public ICommand Zero { get; set; }
         public ICommand Accept { get; set; }
         public ICommand CancelAccept { get; set; }
+        public ICommand AddComment { get; set; }
 
         public QuestionDetailsView(Post question)
         {
@@ -53,6 +55,9 @@ namespace prbd_1920_xyy
             Zero = new RelayCommand<Post>(param =>ZeroVote(param));
             Accept = new RelayCommand<Post>(param =>AcceptAction(param));
             CancelAccept = new RelayCommand<Post>(param =>CancelAcceptAction(param));
+            AddComment = new RelayCommand<Post>((p) => {
+                App.NotifyColleagues(AppMessages.MSG_ADD_COMMENT, p);
+            });
 
         }
 

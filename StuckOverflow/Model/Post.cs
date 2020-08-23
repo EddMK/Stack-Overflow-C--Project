@@ -29,7 +29,7 @@ namespace prbd_1920_xyy
             new HashSet<Post>();
         
         [InverseProperty(nameof(Comment.PostId))]
-        public virtual ICollection<Comment> CommentAdded { get; set; } =
+        public virtual ICollection<Comment> Comments { get; set; } =
             new HashSet<Comment>();
 
         [InverseProperty(nameof(Vote.PostId))]

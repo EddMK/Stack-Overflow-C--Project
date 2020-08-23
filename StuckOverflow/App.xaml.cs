@@ -14,7 +14,9 @@ using System.Windows;
 
 namespace prbd_1920_xyy {
     public enum AppMessages {
-        MSG_DISPLAY_QUESTION,MSG_DELETE_VIEUW
+        MSG_DISPLAY_QUESTION,
+        MSG_DELETE_VIEUW,
+        MSG_ADD_COMMENT
     }
 
     public partial class App : ApplicationBase {

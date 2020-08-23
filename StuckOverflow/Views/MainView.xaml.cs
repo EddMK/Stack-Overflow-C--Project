@@ -18,7 +18,23 @@ namespace prbd_1920_xyy {
             
             DataContext = this;
 
-
+            App.Register<Post>(this, AppMessages.MSG_ADD_COMMENT, m => {
+                foreach (TabItem t in tabControl.Items)
+                {
+                    if (t.Header.ToString().Equals("Add Comment"))
+                    {
+                        Dispatcher.InvokeAsync(() => t.Focus());
+                        return;
+                    }
+                }
+                var tab = new TabItem()
+                {
+                    Header = "Add Comment",
+                    Content = new AddCommentView(m)
+                };
+                tabControl.Items.Add(tab);
+                Dispatcher.InvokeAsync(() => tab.Focus());
+            });
 
             App.Register<Post>(this, AppMessages.MSG_DISPLAY_QUESTION, m => {
                 TabOfMember(m);
