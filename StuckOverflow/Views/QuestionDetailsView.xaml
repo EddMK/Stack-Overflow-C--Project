@@ -92,7 +92,28 @@
                             <Button  Content="Delete" Command="{Binding DataContext.Delete, ElementName=listanswers}" CommandParameter="{Binding}"
                              Visibility="{Binding IsCurrentAuthor, Converter={StaticResource BoolToVis}}"/>
                         </WrapPanel>
-                        <TextBlock Text="{Binding Body}" Margin="10 0 0 0"/>
+                        <StackPanel Margin=" 0 0 0 50">
+                            <TextBlock Text="{Binding Body}" Margin="10 0 0 0"/>
+                            <TextBlock Text="Comments : " Margin="40 0 0 10"/>
+                            <ItemsControl Grid.Row="1" Name="listcomments"  ItemsSource="{Binding Comments}" Margin="40 0 0 0">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <WrapPanel>
+                                            <TextBlock Text="{Binding Body}"/>
+                                            <TextBlock Text="-" />
+                                            <TextBlock Text="{Binding GetUserName}"/>
+                                            <TextBlock Text=" " />
+                                            <TextBlock Text="{Binding GetAgo}"/>
+                                            <Button  Content="Edit"  Command="{Binding DataContext.EditComment, ElementName=listcomments}" CommandParameter="{Binding}"
+                                    Visibility="{Binding IsCurrentAuthor, Converter={StaticResource BoolToVis}}" />
+                                            <Button  Content="Supprimer" Command="{Binding DataContext.DeleteComment, ElementName=listcomments}" CommandParameter="{Binding}"
+                                 Visibility="{Binding IsCurrentAuthor, Converter={StaticResource BoolToVis}}"/>
+                                        </WrapPanel>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                            <Button x:Name="btnComment" Content="Add Comment" Command="{Binding DataContext.AddComment, ElementName=listanswers}" CommandParameter="{Binding}" Width="100" />
+                        </StackPanel>
                     </DockPanel>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
