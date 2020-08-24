@@ -38,6 +38,7 @@ namespace prbd_1920_xyy {
 
 
             App.Register<Comment>(this, AppMessages.MSG_EDIT_COMMENT, m => {
+                Console.WriteLine(m);
                 foreach (TabItem t in tabControl.Items)
                 {
                     if (t.Header.ToString().Equals("Edit Comment"))

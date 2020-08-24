@@ -28,7 +28,7 @@ namespace prbd_1920_xyy
         public ICommand AddComment { get; set; }
 
 
-        public EditCommentView(Comment c)
+        public EditCommentView(Comment comment)
         {
             InitializeComponent();
 
@@ -36,7 +36,7 @@ namespace prbd_1920_xyy
 
             //this.Post = p;
 
-            Console.WriteLine(c.Body);
+            Console.WriteLine(comment.Body);
 
             AddComment = new RelayCommand(AddCommentAction,
                () => { return body != null && !HasErrors; });

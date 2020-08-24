@@ -104,8 +104,9 @@
                                             <TextBlock Text="{Binding GetUserName}"/>
                                             <TextBlock Text=" " />
                                             <TextBlock Text="{Binding GetAgo}"/>
-                                            <Button  Content="Edit"  Command="{Binding DataContext.EditComment, ElementName=listcomments}" CommandParameter="{Binding}"
-                                    Visibility="{Binding IsCurrentAuthor, Converter={StaticResource BoolToVis}}" />
+                                            <Button     Content="Edit"  Command="{Binding DataContext.EditComment}" 
+                                                        CommandParameter="{Binding Path=SelectedItem}"
+                                                        Visibility="{Binding IsCurrentAuthor, Converter={StaticResource BoolToVis}}" />
                                             <Button  Content="Supprimer" Command="{Binding DataContext.DeleteComment, ElementName=listcomments}" CommandParameter="{Binding}"
                                  Visibility="{Binding IsCurrentAuthor, Converter={StaticResource BoolToVis}}"/>
                                         </WrapPanel>

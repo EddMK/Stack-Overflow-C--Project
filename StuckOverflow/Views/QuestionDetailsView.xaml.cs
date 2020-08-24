@@ -60,8 +60,9 @@ namespace prbd_1920_xyy
             AddComment = new RelayCommand<Post>((p) => {
                 App.NotifyColleagues(AppMessages.MSG_ADD_COMMENT, p);
             });
-            EditComment = new RelayCommand<Comment>((p) => {
-                App.NotifyColleagues(AppMessages.MSG_EDIT_COMMENT, p);
+            EditComment = new RelayCommand<Comment>((c) => {
+                Console.WriteLine(c);
+                App.NotifyColleagues(AppMessages.MSG_EDIT_COMMENT, c);
             });
             DeleteComment = new RelayCommand<Comment>(param => DeleteCommentAction(param));
 
