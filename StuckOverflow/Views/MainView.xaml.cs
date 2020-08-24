@@ -36,6 +36,26 @@ namespace prbd_1920_xyy {
                 Dispatcher.InvokeAsync(() => tab.Focus());
             });
 
+
+            App.Register<Comment>(this, AppMessages.MSG_EDIT_COMMENT, m => {
+                foreach (TabItem t in tabControl.Items)
+                {
+                    if (t.Header.ToString().Equals("Edit Comment"))
+                    {
+                        Dispatcher.InvokeAsync(() => t.Focus());
+                        return;
+                    }
+                }
+                var tab = new TabItem()
+                {
+                    Header = "Edit Comment",
+                    Content = new EditCommentView(m)
+                };
+                tabControl.Items.Add(tab);
+                Dispatcher.InvokeAsync(() => tab.Focus());
+            });
+
+
             App.Register<Post>(this, AppMessages.MSG_DISPLAY_QUESTION, m => {
                 TabOfMember(m);
             });

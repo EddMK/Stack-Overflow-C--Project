@@ -16,7 +16,8 @@ namespace prbd_1920_xyy {
     public enum AppMessages {
         MSG_DISPLAY_QUESTION,
         MSG_DELETE_VIEUW,
-        MSG_ADD_COMMENT
+        MSG_ADD_COMMENT,
+        MSG_EDIT_COMMENT
     }
 
     public partial class App : ApplicationBase {

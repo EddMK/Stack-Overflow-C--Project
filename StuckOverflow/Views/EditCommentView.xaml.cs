@@ -8,7 +8,7 @@ using System.Windows.Input;
 
 namespace prbd_1920_xyy
 {
-    public partial class AddCommentView : UserControlBase
+    public partial class EditCommentView : UserControlBase
     {
 
         private Post post;
@@ -28,13 +28,15 @@ namespace prbd_1920_xyy
         public ICommand AddComment { get; set; }
 
 
-        public AddCommentView(Post p)
+        public EditCommentView(Comment c)
         {
             InitializeComponent();
 
             DataContext = this;
 
-            this.Post = p;
+            //this.Post = p;
+
+            Console.WriteLine(c.Body);
 
             AddComment = new RelayCommand(AddCommentAction,
                () => { return body != null && !HasErrors; });
@@ -47,11 +49,11 @@ namespace prbd_1920_xyy
                 User connected = App.CurrentUser;
                 DateTime now = new DateTime();
                 now = DateTime.Now;
-                var newcomment = App.Model.CreateComment(connected, Post,Body,now);
+                var newcomment = App.Model.CreateComment(connected, Post, Body, now);
                 App.Model.Comments.Add(newcomment);
                 App.Model.SaveChanges();
                 Post post;
-                if(Post.Title == null)
+                if (Post.Title == null)
                 {
                     post = App.Model.Posts.SingleOrDefault(v => v.PostId == Post.ParentId.PostId);
                 }

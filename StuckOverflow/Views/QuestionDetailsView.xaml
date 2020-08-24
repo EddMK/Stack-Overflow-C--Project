@@ -52,7 +52,17 @@
                 <ItemsControl Grid.Row="1" Name="listcomments"  ItemsSource="{Binding Question.Comments}" Margin="40 0 0 0">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding Body}"/>
+                            <WrapPanel>
+                                <TextBlock Text="{Binding Body}"/>
+                                <TextBlock Text="-" />
+                                <TextBlock Text="{Binding GetUserName}"/>
+                                <TextBlock Text=" " />
+                                <TextBlock Text="{Binding GetAgo}"/>
+                                <Button  Content="Edit"  Command="{Binding DataContext.EditComment, ElementName=listcomments}" CommandParameter="{Binding}"
+                                    Visibility="{Binding Question.IsCurrentAuthor, Converter={StaticResource BoolToVis}}" />
+                                <Button  Content="Supprimer" Command="{Binding DataContext.DeleteComment, ElementName=listcomments}" CommandParameter="{Binding}"
+                                 Visibility="{Binding Question.IsCurrentAuthor, Converter={StaticResource BoolToVis}}"/>    
+                            </WrapPanel>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
