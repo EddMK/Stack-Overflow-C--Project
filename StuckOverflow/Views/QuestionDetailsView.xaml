@@ -26,9 +26,9 @@
                     <TextBlock  Text="{Binding Question.GetAgo}" />
                     <TextBlock  Text=" asked by " />
                     <TextBlock  Text="{Binding Question.AuthorId.UserName}" />
-                    <Button  Content="Edit"  
+                    <Button  Content="Edit Question"  Command="{Binding DataContext.EditQuestion}" CommandParameter="{Binding Question}"
                         Visibility="{Binding Question.IsCurrentAuthor, Converter={StaticResource BoolToVis}}" />
-                    <Button  Content="Supprimer" 
+                    <Button  Content="Delete Question" Command="{Binding DataContext.DeleteQuestion}" CommandParameter="{Binding Question}"
                              Visibility="{Binding Question.IsCurrentAuthor, Converter={StaticResource BoolToVis}}"/>
                 </WrapPanel>
                 <WrapPanel Orientation="Horizontal">
@@ -88,10 +88,9 @@
                             <TextBlock  Text="{Binding GetAgo}" />
                             <TextBlock  Text=" answered by " />
                             <TextBlock  Text="{Binding AuthorId.UserName}" />
-                            
-                            <Button  Content="Edit" Command="{Binding DataContext.Edit, ElementName=listanswers}" CommandParameter="{Binding}"
+                            <Button  Content="Edit Answer" Command="{Binding DataContext.EditAnswer, ElementName=listanswers}" CommandParameter="{Binding}"
                              Visibility="{Binding IsCurrentAuthor, Converter={StaticResource BoolToVis}}"/>
-                            <Button  Content="Delete" Command="{Binding DataContext.Delete, ElementName=listanswers}" CommandParameter="{Binding}"
+                            <Button  Content="Delete Answer" Command="{Binding DataContext.DeleteAnswer, ElementName=listanswers}" CommandParameter="{Binding}"
                              Visibility="{Binding IsCurrentAuthor, Converter={StaticResource BoolToVis}}"/>
                         </WrapPanel>
                         <StackPanel Margin=" 0 0 0 50">

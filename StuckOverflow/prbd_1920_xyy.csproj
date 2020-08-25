@@ -157,8 +157,14 @@
     <Compile Include="Views\AskView.xaml.cs">
       <DependentUpon>AskView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\EditAnswerView.xaml.cs">
+      <DependentUpon>EditAnswerView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\EditCommentView.xaml.cs">
       <DependentUpon>EditCommentView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EditQuestionView.xaml.cs">
+      <DependentUpon>EditQuestionView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\QuestionDetailsView.xaml.cs">
       <DependentUpon>QuestionDetailsView.xaml</DependentUpon>
@@ -183,7 +189,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\EditAnswerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\EditCommentView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\EditQuestionView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

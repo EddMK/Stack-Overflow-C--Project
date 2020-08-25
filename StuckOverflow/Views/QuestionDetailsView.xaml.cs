@@ -39,6 +39,10 @@ namespace prbd_1920_xyy
         public ICommand AddComment { get; set; }
         public ICommand DeleteComment { get; set; }
         public ICommand EditComment { get; set; }
+        public ICommand EditAnswer { get; set; }
+        public ICommand DeleteAnswer { get; set; }
+        public ICommand EditQuestion { get; set; }
+        public ICommand DeleteQuestion { get; set; }
 
         public QuestionDetailsView(Post question)
         {
@@ -65,7 +69,12 @@ namespace prbd_1920_xyy
                 App.NotifyColleagues(AppMessages.MSG_EDIT_COMMENT, c);
             });
             DeleteComment = new RelayCommand<Comment>(param => DeleteCommentAction(param));
-
+            EditAnswer = new RelayCommand<Post>((p) => {
+                App.NotifyColleagues(AppMessages.MSG_EDIT_ANSWER, p);
+            }); 
+            EditQuestion = new RelayCommand<Post>((p) => {
+                //App.NotifyColleagues(AppMessages.MSG_EDIT_COMMENT, c);
+            });
         }
 
         private void DeleteCommentAction(Comment c)
