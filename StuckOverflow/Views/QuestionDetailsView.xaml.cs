@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Windows;
 using System.Windows.Input;
 
 namespace prbd_1920_xyy
@@ -38,7 +39,6 @@ namespace prbd_1920_xyy
         public ICommand AddComment { get; set; }
         public ICommand DeleteComment { get; set; }
         public ICommand EditComment { get; set; }
-        public ICommand EditCommentAnswer { get; set; }
 
         public QuestionDetailsView(Post question)
         {
@@ -48,7 +48,7 @@ namespace prbd_1920_xyy
 
             this.question = question;
 
-            RefreshAnswers();
+            Refresh(question);
 
             Answer = new RelayCommand(AnswerAction,
                 () => { return body != null && !HasErrors; });
@@ -70,7 +70,22 @@ namespace prbd_1920_xyy
 
         private void DeleteCommentAction(Comment c)
         {
-
+            Console.WriteLine(c.Body);
+            MessageBoxResult result = MessageBox.Show("Are you sure you want to delete", "Delete", MessageBoxButton.YesNo);
+            switch (result)
+            {
+                case MessageBoxResult.Yes:
+                    var post = App.Model.Posts.Find(c.PostId.PostId);
+                    post.Comments.Remove(c);
+                    var user = App.Model.Users.Find(c.UserId.UserId);
+                    user.CommentWritten.Remove(c);
+                    App.Model.Comments.Remove(c);
+                    App.Model.SaveChanges();
+                    Post quest = Question;
+                    App.NotifyColleagues(AppMessages.MSG_DELETE_VIEUW, "Question");
+                    App.NotifyColleagues(AppMessages.MSG_REFRESH_QUESTION, quest);
+                    break;
+            }
         }
 
         private void AcceptAction(Post param)
@@ -151,25 +166,26 @@ namespace prbd_1920_xyy
             }
         }
 
-        public void RefreshAnswers()
+        public void Refresh(Post question)
         {
-            if (Question.AcceptedAnswerId == null)
+            this.question = question;
+            if (question.AcceptedAnswerId == null)
             {
                 var q1 = from m in App.Model.Posts
                          let scores = m.Votes.Sum( v => v.UpDown)
-                         where m.Title == null && m.ParentId.PostId == Question.PostId
+                         where m.Title == null && m.ParentId.PostId == question.PostId
                          orderby scores descending, m.DateTime descending
                          select m;
                 Answers = new ObservableCollection<Post>(q1);
             }
             else
             {
-                Post v = App.Model.Posts.SingleOrDefault(post =>  post.PostId == Question.AcceptedAnswerId.PostId);
+                Post v = App.Model.Posts.SingleOrDefault(post =>  post.PostId == question.AcceptedAnswerId.PostId);
                 Answers = new ObservableCollection<Post>();
                 Answers.Add(v);
                 var q1 = from m in App.Model.Posts
                          let scores = m.Votes.Sum( s  => s.UpDown)
-                         where m.Title == null && m.PostId != Question.AcceptedAnswerId.PostId && m.ParentId.PostId == Question.PostId
+                         where m.Title == null && m.PostId != question.AcceptedAnswerId.PostId && m.ParentId.PostId == question.PostId
                          orderby scores descending, m.DateTime descending
                          select m;
                 var xlist = new List<Post>();
@@ -207,7 +223,7 @@ namespace prbd_1920_xyy
                 App.Model.Posts.Add(newanswer);
                 App.Model.SaveChanges();
                 textAnswer.Clear();
-                RefreshAnswers();
+                Refresh(Question);
             }
         }
 

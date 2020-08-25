@@ -59,9 +59,9 @@
                                 <TextBlock Text="{Binding GetUserName}"/>
                                 <TextBlock Text=" " />
                                 <TextBlock Text="{Binding GetAgo}"/>
-                                <Button  Content="Edit"  Command="{Binding DataContext.EditComment, ElementName=listcomments}" CommandParameter="{Binding}"
+                                <Button  Content="Edit Comment"  Command="{Binding DataContext.EditComment, ElementName=listcomments}" CommandParameter="{Binding}"
                                     Visibility="{Binding Question.IsCurrentAuthor, Converter={StaticResource BoolToVis}}" />
-                                <Button  Content="Supprimer" Command="{Binding DataContext.DeleteComment, ElementName=listcomments}" CommandParameter="{Binding}"
+                                <Button  Content="Delete Comment" Command="{Binding DataContext.DeleteComment, ElementName=listcomments}" CommandParameter="{Binding}"
                                  Visibility="{Binding Question.IsCurrentAuthor, Converter={StaticResource BoolToVis}}"/>    
                             </WrapPanel>
                         </DataTemplate>
@@ -114,10 +114,14 @@
                                                     </i:EventTrigger>
                                                 </i:Interaction.Triggers>
                                             </Button>
-                                            <Button     Content="Edit"  
-                                                        Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}, Path =DataContext.EditCommentAnswer}"/>
-                                            <Button  Content="Supprimer" Command="{Binding DataContext.DeleteComment, ElementName=listcomments}" CommandParameter="{Binding}"
-                                 Visibility="{Binding IsCurrentAuthor, Converter={StaticResource BoolToVis}}"/>
+                                            <Button  Content="Delete Comment" >
+                                                <i:Interaction.Triggers>
+                                                    <i:EventTrigger EventName="Click">
+                                                        <i:InvokeCommandAction Command="{Binding DeleteComment, ElementName=page}" 
+                                                                               CommandParameter="{Binding }"/>
+                                                    </i:EventTrigger>
+                                                </i:Interaction.Triggers>
+                                            </Button>
                                         </WrapPanel>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>

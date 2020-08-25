@@ -112,7 +112,9 @@ namespace prbd_1920_xyy
                 }
                 App.Model.SaveChanges();
                 App.NotifyColleagues(AppMessages.MSG_DELETE_VIEUW, "Ask");
-                App.NotifyColleagues(AppMessages.MSG_DISPLAY_QUESTION, newquestion);
+                App.NotifyColleagues(AppMessages.MSG_DELETE_VIEUW, "Question");
+                App.NotifyColleagues(AppMessages.MSG_REFRESH_QUESTION, newquestion);
+                //App.NotifyColleagues(AppMessages.MSG_DISPLAY_QUESTION, newquestion);
                 
 
 

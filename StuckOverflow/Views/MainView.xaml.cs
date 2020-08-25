@@ -38,7 +38,7 @@ namespace prbd_1920_xyy {
 
 
             App.Register<Comment>(this, AppMessages.MSG_EDIT_COMMENT, m => {
-                Console.WriteLine(m);
+                //Console.WriteLine(m);
                 foreach (TabItem t in tabControl.Items)
                 {
                     if (t.Header.ToString().Equals("Edit Comment"))
@@ -56,6 +56,16 @@ namespace prbd_1920_xyy {
                 Dispatcher.InvokeAsync(() => tab.Focus());
             });
 
+
+            App.Register<Post>(this, AppMessages.MSG_REFRESH_QUESTION, m => {
+                var tab = new TabItem()
+                {
+                    Header = "Question",
+                    Content = new QuestionDetailsView(m)
+                };
+                tabControl.Items.Add(tab);
+                Dispatcher.InvokeAsync(() => tab.Focus());
+            });
 
             App.Register<Post>(this, AppMessages.MSG_DISPLAY_QUESTION, m => {
                 TabOfMember(m);
@@ -95,7 +105,7 @@ namespace prbd_1920_xyy {
                 }
             }
             var tab = new TabItem() {
-                Header = "Question Detail",
+                Header = "Question",
                 Content = new QuestionDetailsView(question)
             };
             tabControl.Items.Add(tab);

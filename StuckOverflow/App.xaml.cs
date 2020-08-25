@@ -17,7 +17,8 @@ namespace prbd_1920_xyy {
         MSG_DISPLAY_QUESTION,
         MSG_DELETE_VIEUW,
         MSG_ADD_COMMENT,
-        MSG_EDIT_COMMENT
+        MSG_EDIT_COMMENT,
+        MSG_REFRESH_QUESTION
     }
 
     public partial class App : ApplicationBase {
