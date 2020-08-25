@@ -7,7 +7,8 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:local="clr-namespace:prbd_1920_xyy"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800"
+                   x:Name="page">
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVis" />
     </UserControl.Resources>
@@ -87,6 +88,7 @@
                             <TextBlock  Text="{Binding GetAgo}" />
                             <TextBlock  Text=" answered by " />
                             <TextBlock  Text="{Binding AuthorId.UserName}" />
+                            
                             <Button  Content="Edit" Command="{Binding DataContext.Edit, ElementName=listanswers}" CommandParameter="{Binding}"
                              Visibility="{Binding IsCurrentAuthor, Converter={StaticResource BoolToVis}}"/>
                             <Button  Content="Delete" Command="{Binding DataContext.Delete, ElementName=listanswers}" CommandParameter="{Binding}"
@@ -104,9 +106,16 @@
                                             <TextBlock Text="{Binding GetUserName}"/>
                                             <TextBlock Text=" " />
                                             <TextBlock Text="{Binding GetAgo}"/>
-                                            <Button     Content="Edit"  Command="{Binding DataContext.EditComment}" 
-                                                        CommandParameter="{Binding Path=SelectedItem}"
-                                                        Visibility="{Binding IsCurrentAuthor, Converter={StaticResource BoolToVis}}" />
+                                            <Button  Content="Edit Comment" >
+                                                <i:Interaction.Triggers>
+                                                    <i:EventTrigger EventName="Click">
+                                                        <i:InvokeCommandAction Command="{Binding EditComment, ElementName=page}" 
+                                                                               CommandParameter="{Binding }"/>
+                                                    </i:EventTrigger>
+                                                </i:Interaction.Triggers>
+                                            </Button>
+                                            <Button     Content="Edit"  
+                                                        Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}, Path =DataContext.EditCommentAnswer}"/>
                                             <Button  Content="Supprimer" Command="{Binding DataContext.DeleteComment, ElementName=listcomments}" CommandParameter="{Binding}"
                                  Visibility="{Binding IsCurrentAuthor, Converter={StaticResource BoolToVis}}"/>
                                         </WrapPanel>

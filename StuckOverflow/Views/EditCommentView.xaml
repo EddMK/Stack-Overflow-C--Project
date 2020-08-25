@@ -10,9 +10,9 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <StackPanel Grid.Row="2" Orientation="Vertical">
-            <TextBox x:Name="textAdd"  Text="{Binding Body, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" MinLines="5" AcceptsReturn="True" MaxLines="10" VerticalScrollBarVisibility="Auto" VerticalAlignment="Top" />
+            <TextBox x:Name="textEdit"  Text="{Binding Body, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" TextWrapping="Wrap" MinLines="5" AcceptsReturn="True" MaxLines="10" VerticalScrollBarVisibility="Auto" VerticalAlignment="Top" />
             <WrapPanel Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Bottom"  Width="100">
-                <Button x:Name="btnAddComment" Content="Add Comment" Command="{Binding AddComment}" Width="auto" Padding="5,1"/>
+                <Button x:Name="btnEditComment" Content="Edit Comment" Command="{Binding EditComment}" Width="auto" Padding="5,1"/>
             </WrapPanel>
         </StackPanel>
     </Grid>

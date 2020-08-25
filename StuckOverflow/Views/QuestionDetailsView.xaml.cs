@@ -38,6 +38,7 @@ namespace prbd_1920_xyy
         public ICommand AddComment { get; set; }
         public ICommand DeleteComment { get; set; }
         public ICommand EditComment { get; set; }
+        public ICommand EditCommentAnswer { get; set; }
 
         public QuestionDetailsView(Post question)
         {
@@ -61,7 +62,6 @@ namespace prbd_1920_xyy
                 App.NotifyColleagues(AppMessages.MSG_ADD_COMMENT, p);
             });
             EditComment = new RelayCommand<Comment>((c) => {
-                Console.WriteLine(c);
                 App.NotifyColleagues(AppMessages.MSG_EDIT_COMMENT, c);
             });
             DeleteComment = new RelayCommand<Comment>(param => DeleteCommentAction(param));

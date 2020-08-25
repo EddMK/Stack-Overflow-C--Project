@@ -11,11 +11,11 @@ namespace prbd_1920_xyy
     public partial class EditCommentView : UserControlBase
     {
 
-        private Post post;
-        public Post Post
+        private Comment comment;
+        public Comment Comment
         {
-            get => post;
-            set => SetProperty<Post>(ref post, value);
+            get => comment;
+            set => SetProperty<Comment>(ref comment, value);
         }
 
         private string body;
@@ -25,7 +25,7 @@ namespace prbd_1920_xyy
             set => SetProperty<string>(ref body, value, () => ValidateBody());
         }
 
-        public ICommand AddComment { get; set; }
+        public ICommand EditComment { get; set; }
 
 
         public EditCommentView(Comment comment)
@@ -34,24 +34,35 @@ namespace prbd_1920_xyy
 
             DataContext = this;
 
-            //this.Post = p;
+            this.Comment = comment;
 
-            Console.WriteLine(comment.Body);
+            this.Body = comment.Body;
 
-            AddComment = new RelayCommand(AddCommentAction,
+            EditComment = new RelayCommand(EditCommentAction,
                () => { return body != null && !HasErrors; });
         }
 
-        private void AddCommentAction()
+        private void EditCommentAction()
         {
             if (ValidateBody())
             {
+                Console.WriteLine(Body);
+                this.Comment.Body = this.Body;
+                App.Model.SaveChanges();
+                var post = App.Model.Posts.Find(Comment.UserId.UserId);
+                if (post.Title == null)
+                {
+                    post = App.Model.Posts.SingleOrDefault(v => v.PostId == post.ParentId.PostId);
+                }
+                App.NotifyColleagues(AppMessages.MSG_DELETE_VIEUW, "Edit Comment");
+                App.NotifyColleagues(AppMessages.MSG_DISPLAY_QUESTION, post);
+                /*
                 User connected = App.CurrentUser;
                 DateTime now = new DateTime();
                 now = DateTime.Now;
                 var newcomment = App.Model.CreateComment(connected, Post, Body, now);
                 App.Model.Comments.Add(newcomment);
-                App.Model.SaveChanges();
+                
                 Post post;
                 if (Post.Title == null)
                 {
@@ -63,6 +74,7 @@ namespace prbd_1920_xyy
                 }
                 App.NotifyColleagues(AppMessages.MSG_DELETE_VIEUW, "Add Comment");
                 App.NotifyColleagues(AppMessages.MSG_DISPLAY_QUESTION, post);
+                */
             }
         }
 
