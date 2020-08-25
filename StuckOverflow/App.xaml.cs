@@ -19,6 +19,7 @@ namespace prbd_1920_xyy {
         MSG_ADD_COMMENT,
         MSG_EDIT_COMMENT,
         MSG_EDIT_ANSWER,
+        MSG_EDIT_QUESTION,
         MSG_REFRESH_QUESTION
     }
 

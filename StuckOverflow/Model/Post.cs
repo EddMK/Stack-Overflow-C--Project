@@ -192,8 +192,7 @@ namespace prbd_1920_xyy
 
         public void DeleteQuestion()
         {
-            var user = App.Model.Users.Find(this.AuthorId);
-            user.PostWritten.Remove(this);
+            this.AuthorId.PostWritten.Remove(this);
             Model.Votes.RemoveRange(this.Votes);
             this.Votes.Clear();
             Model.Comments.RemoveRange(this.Comments);

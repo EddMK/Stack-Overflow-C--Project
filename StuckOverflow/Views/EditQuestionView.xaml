@@ -9,11 +9,47 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <StackPanel Grid.Row="2" Orientation="Vertical">
-            <TextBox x:Name="textEdit"  Text="{Binding Body, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" TextWrapping="Wrap" MinLines="5" AcceptsReturn="True" MaxLines="10" VerticalScrollBarVisibility="Auto" VerticalAlignment="Top" />
-            <WrapPanel Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Bottom"  Width="100">
-                <Button x:Name="btnEditComment" Content="Edit Comment" Command="{Binding EditComment}" Width="auto" Padding="5,1"/>
-            </WrapPanel>
-        </StackPanel>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <!-- ROW #1 -->
+        <Label Content="Title :" />
+        <TextBox x:Name="title" Grid.Column="1" Text="{Binding Titre, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" VerticalAlignment="Center" />
+        <!-- ROW #2 -->
+        <Label Content="Tags :" Grid.Row="1"/>
+        <f:ValidatedField Grid.Row="1"  Grid.Column="1" >
+            <ListBox Name="listeTags" ItemsSource="{Binding Tags}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <CheckBox Content="{Binding TagName}" IsChecked="{Binding Coche}" >
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Checked">
+                                    <i:InvokeCommandAction  Command="{Binding DataContext.BoxChecked, ElementName=listeTags}"
+                                                            CommandParameter="{Binding}"/>
+                                </i:EventTrigger>
+                                <i:EventTrigger EventName="Unchecked">
+                                    <i:InvokeCommandAction  Command="{Binding DataContext.BoxUnchecked, ElementName=listeTags}"
+                                                            CommandParameter="{Binding}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </CheckBox>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </f:ValidatedField>
+        <!-- ROW #3 -->
+        <Label Content="Body :" Grid.Row="2" />
+        <TextBox  Text="{Binding Body, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Column="1" Grid.Row="2" TextWrapping="Wrap" MinLines="5" AcceptsReturn="True" MaxLines="10" VerticalScrollBarVisibility="Auto" VerticalAlignment="Top" />
+        <!-- ROW #4 -->
+        <WrapPanel Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Column="1" Width="100">
+            <Button x:Name="btnEdit" Content="Edit Question" Command="{Binding EditQuestion}" Width="auto" Margin="10,0,0,0"  Padding="5,1"/>
+        </WrapPanel>
     </Grid>
 </f:UserControlBase>

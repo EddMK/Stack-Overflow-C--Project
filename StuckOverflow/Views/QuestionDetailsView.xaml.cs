@@ -74,7 +74,7 @@ namespace prbd_1920_xyy
                 App.NotifyColleagues(AppMessages.MSG_EDIT_ANSWER, p);
             }); 
             EditQuestion = new RelayCommand<Post>((p) => {
-                //App.NotifyColleagues(AppMessages.MSG_EDIT_COMMENT, c);
+                App.NotifyColleagues(AppMessages.MSG_EDIT_QUESTION, p);
             });
         }
 
