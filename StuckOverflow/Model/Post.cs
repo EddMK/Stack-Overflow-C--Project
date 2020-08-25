@@ -176,6 +176,40 @@ namespace prbd_1920_xyy
             }
         }
 
+        public void DeleteAnswer()
+        {
+            this.AuthorId.PostWritten.Remove(this);
+            this.ParentId.AnsweredQuestions.Remove(this);
+            if (this.ParentId.AcceptedAnswerId == this) {
+                this.ParentId.AcceptedAnswerId = null;
+            }
+            Model.Votes.RemoveRange(this.Votes);
+            this.Votes.Clear();
+            Model.Comments.RemoveRange(this.Comments);
+            this.Comments.Clear();
+            Model.Posts.Remove(this);
+        }
+
+        public void DeleteQuestion()
+        {
+            var user = App.Model.Users.Find(this.AuthorId);
+            user.PostWritten.Remove(this);
+            Model.Votes.RemoveRange(this.Votes);
+            this.Votes.Clear();
+            Model.Comments.RemoveRange(this.Comments);
+            this.Comments.Clear();
+            foreach( var tag in this.Tags)
+            {
+                tag.Posts.Remove(this);
+            }
+            Tags.Clear();
+            foreach( var post in this.AnsweredQuestions)
+            {
+                post.DeleteAnswer();
+            }
+            Model.Posts.Remove(this);
+        }
+
 
     }
 }

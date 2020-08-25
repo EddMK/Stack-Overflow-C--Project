@@ -69,6 +69,7 @@ namespace prbd_1920_xyy
                 App.NotifyColleagues(AppMessages.MSG_EDIT_COMMENT, c);
             });
             DeleteComment = new RelayCommand<Comment>(param => DeleteCommentAction(param));
+            DeleteAnswer = new RelayCommand<Post>(param => DeleteAnswerAction(param));
             EditAnswer = new RelayCommand<Post>((p) => {
                 App.NotifyColleagues(AppMessages.MSG_EDIT_ANSWER, p);
             }); 
@@ -79,7 +80,7 @@ namespace prbd_1920_xyy
 
         private void DeleteCommentAction(Comment c)
         {
-            Console.WriteLine(c.Body);
+            //Console.WriteLine(c.Body);
             MessageBoxResult result = MessageBox.Show("Are you sure you want to delete", "Delete", MessageBoxButton.YesNo);
             switch (result)
             {
@@ -95,7 +96,22 @@ namespace prbd_1920_xyy
                     App.NotifyColleagues(AppMessages.MSG_REFRESH_QUESTION, quest);
                     break;
             }
+        }private void DeleteAnswerAction(Post answer)
+        {
+            Console.WriteLine(answer.Body);
+            MessageBoxResult result = MessageBox.Show("Are you sure you want to delete", "Delete", MessageBoxButton.YesNo);
+            switch (result)
+            {
+                case MessageBoxResult.Yes:
+                    answer.DeleteAnswer();
+                    App.Model.SaveChanges();
+                    Post quest = Question;
+                    App.NotifyColleagues(AppMessages.MSG_DELETE_VIEUW, "Question");
+                    App.NotifyColleagues(AppMessages.MSG_REFRESH_QUESTION, quest);
+                    break;
+            }
         }
+
 
         private void AcceptAction(Post param)
         {
