@@ -15,6 +15,7 @@ using System.Windows;
 namespace prbd_1920_xyy {
     public enum AppMessages {
         MSG_DISPLAY_QUESTION,
+        MSG_DISPLAY_BYTAG,
         MSG_DELETE_VIEUW,
         MSG_ADD_COMMENT,
         MSG_EDIT_COMMENT,

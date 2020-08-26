@@ -6,8 +6,17 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows.Input;
 
-namespace prbd_1920_xyy {
-    public partial class NewestView : UserControlBase {
+namespace prbd_1920_xyy
+{
+    public partial class ByTagView : UserControlBase
+    {
+
+        private Tag tag;
+        public Tag TheTag
+        {
+            get => tag;
+            set => SetProperty<Tag>(ref tag, value);
+        }
 
         private ObservableCollection<Post> posts;
         public ObservableCollection<Post> Posts { get => posts; set => SetProperty(ref posts, value); }
@@ -15,29 +24,28 @@ namespace prbd_1920_xyy {
         public ICommand DisplayQuestionDetails { get; set; }
         public ICommand DisplayByTag { get; set; }
 
-        public NewestView() {
+        public ByTagView(Tag t)
+        {
             InitializeComponent();
 
             DataContext = this;
+
+            TheTag = t;
 
             DisplayQuestionDetails = new RelayCommand<Post>(m => {
                 App.NotifyColleagues(AppMessages.MSG_DISPLAY_QUESTION, m);
             });
 
-            DisplayByTag = new RelayCommand<Tag>((t) => {
-                //Console.WriteLine(t.TagName);
-                App.NotifyColleagues(AppMessages.MSG_DISPLAY_BYTAG, t);
+            DisplayByTag = new RelayCommand<Tag>(m => {
+                App.NotifyColleagues(AppMessages.MSG_DISPLAY_BYTAG, m);
             });
-            
+
             Refresh();
         }
 
-        private void Refresh() {
-            var q1 = from m in App.Model.Posts
-                     where m.Title != null
-                     orderby m.DateTime descending
-                     select m;
-            Posts = new ObservableCollection<Post>(q1);
+        private void Refresh()
+        {
+            Posts = new ObservableCollection<Post>(TheTag.Posts);
         }
     }
 }

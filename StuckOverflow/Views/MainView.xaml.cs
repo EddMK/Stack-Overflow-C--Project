@@ -35,6 +35,24 @@ namespace prbd_1920_xyy {
                 tabControl.Items.Add(tab);
                 Dispatcher.InvokeAsync(() => tab.Focus());
             });
+            
+            App.Register<Tag>(this, AppMessages.MSG_DISPLAY_BYTAG, m => {
+                foreach (TabItem t in tabControl.Items)
+                {
+                    if (t.Header.ToString().Equals("By Tag"))
+                    {
+                        Dispatcher.InvokeAsync(() => t.Focus());
+                        return;
+                    }
+                }
+                var tab = new TabItem()
+                {
+                    Header = "By Tag",
+                    Content = new ByTagView(m)
+                };
+                tabControl.Items.Add(tab);
+                Dispatcher.InvokeAsync(() => tab.Focus());
+            });
 
 
             App.Register<Comment>(this, AppMessages.MSG_EDIT_COMMENT, m => {

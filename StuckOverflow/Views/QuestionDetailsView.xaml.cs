@@ -70,6 +70,7 @@ namespace prbd_1920_xyy
             });
             DeleteComment = new RelayCommand<Comment>(param => DeleteCommentAction(param));
             DeleteAnswer = new RelayCommand<Post>(param => DeleteAnswerAction(param));
+            DeleteQuestion = new RelayCommand<Post>(param => DeleteQuestionAction(param));
             EditAnswer = new RelayCommand<Post>((p) => {
                 App.NotifyColleagues(AppMessages.MSG_EDIT_ANSWER, p);
             }); 
@@ -96,9 +97,11 @@ namespace prbd_1920_xyy
                     App.NotifyColleagues(AppMessages.MSG_REFRESH_QUESTION, quest);
                     break;
             }
-        }private void DeleteAnswerAction(Post answer)
+        }
+        
+        private void DeleteAnswerAction(Post answer)
         {
-            Console.WriteLine(answer.Body);
+            //Console.WriteLine(answer.Body);
             MessageBoxResult result = MessageBox.Show("Are you sure you want to delete", "Delete", MessageBoxButton.YesNo);
             switch (result)
             {
@@ -108,6 +111,20 @@ namespace prbd_1920_xyy
                     Post quest = Question;
                     App.NotifyColleagues(AppMessages.MSG_DELETE_VIEUW, "Question");
                     App.NotifyColleagues(AppMessages.MSG_REFRESH_QUESTION, quest);
+                    break;
+            }
+        }
+
+        private void DeleteQuestionAction(Post question)
+        {
+            //Console.WriteLine(answer.Body);
+            MessageBoxResult result = MessageBox.Show("Are you sure you want to delete", "Delete", MessageBoxButton.YesNo);
+            switch (result)
+            {
+                case MessageBoxResult.Yes:
+                    question.DeleteQuestion();
+                    App.Model.SaveChanges();
+                    App.NotifyColleagues(AppMessages.MSG_DELETE_VIEUW, "Question");
                     break;
             }
         }

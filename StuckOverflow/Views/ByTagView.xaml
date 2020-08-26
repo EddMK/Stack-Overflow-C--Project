@@ -1,4 +1,4 @@
-﻿<f:UserControlBase x:Class="prbd_1920_xyy.UnansweredView"
+﻿<f:UserControlBase x:Class="prbd_1920_xyy.ByTagView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -31,23 +31,29 @@
                             <TextBlock Text=" vote(s), "/>
                             <TextBlock Text="{Binding GetAnswersCount}"/>
                             <TextBlock Text=" answer(s))"/>
-                            <!---
-                            <TextBlock>                                
-    <Hyperlink Command="{Binding SomeCommand, ElementName=window}" CommandParameter="{Binding}">Link
-    </Hyperlink>
-</TextBlock>
-                            -->
-                            <ListView x:Name="listTags" ItemsSource="{Binding Tags}">
-                                <ListView.ItemTemplate>
+                            <ItemsControl x:Name="listTags" ItemsSource="{Binding Tags}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Orientation="Horizontal"/>
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding TagName}"/>
+                                        <Button Content="{Binding TagName}" >
+                                            <i:Interaction.Triggers>
+                                                <i:EventTrigger EventName="Click">
+                                                    <i:InvokeCommandAction Command="{Binding DisplayByTag, ElementName=pag}" 
+                                                                               CommandParameter="{Binding }"/>
+                                                </i:EventTrigger>
+                                            </i:Interaction.Triggers>
+                                        </Button>
                                     </DataTemplate>
-                                </ListView.ItemTemplate>
-                            </ListView>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
                         </WrapPanel>
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
-        </ListView>       
+        </ListView>
     </Grid>
 </f:UserControlBase>

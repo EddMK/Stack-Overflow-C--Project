@@ -7,30 +7,54 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:local="clr-namespace:prbd_1920_xyy"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800"
+                   x:Name="pag">
     <Grid>
-        <ListView x:Name="listView" ItemsSource="{Binding Path=Posts}" SelectionMode="Single">
+        <ListView x:Name="listView" ItemsSource="{Binding Posts}" SelectionMode="Single">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="MouseDoubleClick">
-
                     <i:InvokeCommandAction  Command="{Binding DisplayQuestionDetails}" 
                                            CommandParameter="{Binding ElementName=listView, Path=SelectedItem}"/>
                 </i:EventTrigger>
             </i:Interaction.Triggers>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <WrapPanel>
-                        <TextBlock  Text="{Binding Title}"/>
+                    <StackPanel>
+                        <TextBlock TextDecorations="Underline"  Text="{Binding Title}"/>
                         <TextBlock Text="{Binding Body}"/>
-                        <TextBlock Text="{Binding GetAgo}"/>
-                    </WrapPanel>
+                        <WrapPanel>
+                            <TextBlock Text="Asked "/>
+                            <TextBlock Text="{Binding GetAgo}"/>
+                            <TextBlock Text=" by "/>
+                            <TextBlock Text="{Binding AuthorName}"/>
+                            <TextBlock Text=" ("/>
+                            <TextBlock Text="{Binding GetScores}"/>
+                            <TextBlock Text=" vote(s), "/>
+                            <TextBlock Text="{Binding GetAnswersCount}"/>
+                            <TextBlock Text=" answer(s))"/>
+                            <ItemsControl x:Name="listTags" ItemsSource="{Binding Tags}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Orientation="Horizontal"/>
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Button Content="{Binding TagName}" >
+                                            <i:Interaction.Triggers>
+                                                <i:EventTrigger EventName="Click">
+                                                    <i:InvokeCommandAction Command="{Binding DisplayByTag, ElementName=pag}" 
+                                                                               CommandParameter="{Binding }"/>
+                                                </i:EventTrigger>
+                                            </i:Interaction.Triggers>
+                                        </Button>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </WrapPanel>
+                    </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
-            <!---<ListView.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding}"></TextBlock>
-                </DataTemplate>
-            </ListView.ItemTemplate>-->
         </ListView>
     </Grid>
 </f:UserControlBase>

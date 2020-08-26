@@ -157,6 +157,9 @@
     <Compile Include="Views\AskView.xaml.cs">
       <DependentUpon>AskView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ByTagView.xaml.cs">
+      <DependentUpon>ByTagView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\EditAnswerView.xaml.cs">
       <DependentUpon>EditAnswerView.xaml</DependentUpon>
     </Compile>
@@ -186,6 +189,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\AskView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ByTagView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -107,10 +107,6 @@ namespace prbd_1920_xyy
                 //t.Coche = false;
 
             }
-            foreach(Taggue tag in TagChecked)
-            {
-                Console.WriteLine(tag.TagName);
-            }
             
             ValidateTags();
 
@@ -203,13 +199,13 @@ namespace prbd_1920_xyy
             ClearErrors();
             if (string.IsNullOrEmpty(Titre))
             {
-                AddError("Title", "Not empty");
+                AddError("Titre", "Not empty");
             }
             else
             {
                 if (string.IsNullOrWhiteSpace(Titre))
                 {
-                    AddError("Title", "Not white space");
+                    AddError("Titre", "Not white space");
                 }
             }
             return !HasErrors;

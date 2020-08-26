@@ -83,6 +83,22 @@ namespace prbd_1920_xyy
             }
         }
 
+        public int GetAnswersCount
+        {
+            get
+            {
+                if (AnsweredQuestions.Count == 0)
+                {
+                    return 0;
+                }
+                else
+                {
+                    
+                    return AnsweredQuestions.Count;
+                }
+            }
+        }
+
         public bool IsCurrentAuthor
         {
             get
@@ -173,6 +189,14 @@ namespace prbd_1920_xyy
                 }
                 return ret;
 
+            }
+        }
+
+        public string AuthorName
+        {
+            get
+            {
+                return this.AuthorId.UserName;
             }
         }
 
